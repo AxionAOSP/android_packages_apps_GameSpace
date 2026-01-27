@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
+@file:OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalMaterial3Api::class)
 
 package io.chaldeaprjkt.gamespace.ui.components
 
@@ -24,14 +24,17 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.SliderState
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberSliderState
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -41,11 +44,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -272,6 +282,145 @@ fun SettingsSlider(
                         activeTrackColor = MaterialTheme.colorScheme.primary,
                         inactiveTrackColor = MaterialTheme.colorScheme.surfaceBright
                     )
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun SettingsSliderWithTrackIcons(
+    title: String,
+    modifier: Modifier = Modifier,
+    valueLabel: String? = null,
+    icon: Any? = null,
+    trackStartIcon: ImageVector,
+    trackEndIcon: ImageVector,
+    sliderState: SliderState = rememberSliderState()
+) {
+    val startIcon = rememberVectorPainter(trackStartIcon)
+    val endIcon = rememberVectorPainter(trackEndIcon)
+
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 4.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceBright
+        ),
+        shape = MaterialTheme.shapes.large
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            if (icon != null) {
+                Box(
+                    modifier = Modifier
+                        .size(48.dp)
+                        .clip(CircleShape)
+                        .background(
+                            brush = Brush.linearGradient(
+                                colors = listOf(
+                                    MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
+                                    MaterialTheme.colorScheme.tertiary.copy(alpha = 0.2f)
+                                )
+                            )
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    when (icon) {
+                        is ImageVector -> Icon(
+                            imageVector = icon,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(24.dp)
+                        )
+                        is Painter -> Icon(
+                            painter = icon,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.width(16.dp))
+            }
+
+            Column(modifier = Modifier.weight(1f)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = title,
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.weight(1f)
+                    )
+                    if (valueLabel != null) {
+                        Text(
+                            text = valueLabel,
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Slider(
+                    state = sliderState,
+                    track = { sliderState ->
+                        val iconSize = DpSize(20.dp, 20.dp)
+                        val iconPadding = 10.dp
+                        val thumbTrackGapSize = 6.dp
+                        val activeIconColor = SliderDefaults.colors().activeTickColor
+                        val inactiveIconColor = SliderDefaults.colors().inactiveTickColor
+
+                        val trackIconStart: DrawScope.(Offset, Color) -> Unit = { offset, color ->
+                            translate(offset.x + iconPadding.toPx(), offset.y) {
+                                with(startIcon) { draw(iconSize.toSize(), colorFilter = ColorFilter.tint(color)) }
+                            }
+                        }
+                        val trackIconEnd: DrawScope.(Offset, Color) -> Unit = { offset, color ->
+                            translate(offset.x - iconPadding.toPx() - iconSize.toSize().width, offset.y) {
+                                with(endIcon) { draw(iconSize.toSize(), colorFilter = ColorFilter.tint(color)) }
+                            }
+                        }
+
+                        SliderDefaults.Track(
+                            sliderState = sliderState,
+                            modifier = Modifier.height(36.dp).drawWithContent {
+                                drawContent()
+                                val yOffset = size.height / 2 - iconSize.toSize().height / 2
+                                val activeTrackStart = 0f
+                                val activeTrackEnd = size.width * sliderState.coercedValueAsFraction - thumbTrackGapSize.toPx()
+                                val inactiveTrackStart = activeTrackEnd + thumbTrackGapSize.toPx() * 2
+                                val inactiveTrackEnd = size.width
+
+                                val activeTrackWidth = activeTrackEnd - activeTrackStart
+                                val inactiveTrackWidth = inactiveTrackEnd - inactiveTrackStart
+
+                                if (iconSize.toSize().width < activeTrackWidth - iconPadding.toPx() * 2) {
+                                    trackIconStart(Offset(activeTrackStart, yOffset), activeIconColor)
+                                    trackIconEnd(Offset(activeTrackEnd, yOffset), activeIconColor)
+                                }
+                                if (iconSize.toSize().width < inactiveTrackWidth - iconPadding.toPx() * 2) {
+                                    trackIconStart(Offset(inactiveTrackStart, yOffset), inactiveIconColor)
+                                    trackIconEnd(Offset(inactiveTrackEnd, yOffset), inactiveIconColor)
+                                }
+                            },
+                            trackCornerSize = 12.dp,
+                            drawStopIndicator = null,
+                            thumbTrackGapSize = thumbTrackGapSize,
+                            colors = SliderDefaults.colors(
+                                inactiveTrackColor = MaterialTheme.colorScheme.surfaceContainer,
+                            ),
+                        )
+                    },
                 )
             }
         }
