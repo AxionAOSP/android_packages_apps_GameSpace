@@ -14,8 +14,8 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -33,10 +33,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChatBubble
-import androidx.compose.material.icons.rounded.ThumbUp
+import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.BatteryChargingFull
+import androidx.compose.material.icons.rounded.Remove
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
@@ -44,6 +44,7 @@ import androidx.compose.material3.FloatingActionButtonMenu
 import androidx.compose.material3.FloatingActionButtonMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -55,10 +56,12 @@ import androidx.compose.material3.ToggleFloatingActionButtonDefaults.animateIcon
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.animateFloatingActionButton
+import androidx.compose.material3.rememberSliderState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -99,17 +102,16 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.semantics.traversalIndex
 import androidx.compose.ui.unit.dp
-import androidx.core.graphics.createBitmap
 import androidx.core.graphics.drawable.toBitmap
-import io.chaldeaprjkt.gamespace.utils.rememberDrawablePainter
 import io.chaldeaprjkt.gamespace.R
 import io.chaldeaprjkt.gamespace.ui.components.GameCard
 import io.chaldeaprjkt.gamespace.ui.components.SettingsDropdown
 import io.chaldeaprjkt.gamespace.ui.components.SettingsSection
-import io.chaldeaprjkt.gamespace.ui.components.SettingsSlider
+import io.chaldeaprjkt.gamespace.ui.components.SettingsSliderWithTrackIcons
 import io.chaldeaprjkt.gamespace.ui.components.SettingsSwitch
 import io.chaldeaprjkt.gamespace.ui.viewmodel.RegisteredGame
 import io.chaldeaprjkt.gamespace.ui.viewmodel.SettingsViewModel
+import io.chaldeaprjkt.gamespace.utils.rememberDrawablePainter
 
 data class AppInfo(
     val packageName: String,
@@ -177,6 +179,8 @@ fun SettingsScreen(
         "2" to stringResource(R.string.ringer_mode_normal),
         "3" to stringResource(R.string.ringer_mode_no_change)
     )
+
+    var menuOpacity by remember { mutableFloatStateOf(viewModel.menuOpacity) }
 
     if (showQuickStartDialog) {
         QuickStartAppsDialog(
@@ -363,13 +367,24 @@ fun SettingsScreen(
                         icon = painterResource(R.drawable.materialsymbols_ic_visibility_rounded_filled)
                     )
 
-                    SettingsSlider(
+                    val sliderState = rememberSliderState(
+                        value = menuOpacity,
+                        steps = 0,
+                        onValueChangeFinished = { viewModel.updateMenuOpacity(menuOpacity) },
+                        valueRange = 0f..100f
+                    )
+
+                    LaunchedEffect(sliderState.value) {
+                        menuOpacity = sliderState.value
+                    }
+
+                    SettingsSliderWithTrackIcons(
                         title = stringResource(R.string.gamespace_menu_opacity_title),
-                        value = viewModel.menuOpacity,
-                        onValueChange = { viewModel.updateMenuOpacity(it) },
-                        valueRange = 0f..100f,
-                        valueLabel = "${viewModel.menuOpacity.toInt()}%",
-                        icon = painterResource(R.drawable.materialsymbols_ic_opacity_rounded_filled)
+                        sliderState = sliderState,
+                        valueLabel = "${menuOpacity.toInt()}%",
+                        icon = painterResource(R.drawable.materialsymbols_ic_opacity_rounded_filled),
+                        trackStartIcon = Icons.Rounded.Remove,
+                        trackEndIcon = Icons.Rounded.Add
                     )
                 }
             }
