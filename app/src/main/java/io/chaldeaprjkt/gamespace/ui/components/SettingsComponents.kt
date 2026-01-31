@@ -175,6 +175,7 @@ fun SettingsSwitch(
                             Icon(
                                 imageVector = Icons.Rounded.Check,
                                 contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.size(SwitchDefaults.IconSize)
                             )
                         } else {
