@@ -77,7 +77,7 @@
     <string name="notification_mode_headsup">Show as heads up</string>
     <string name="notification_mode_reticker">Show as reTicker</string>
     <string name="notification_mode_danmaku">Show as Danmaku</string>
-    <string name="notification_hide">Hide</string>
+    <string name="notification_hide">أخفاء</string>
     <string name="notification_headsup">Heads Up</string>
     <string name="notification_reticker">reTicker</string>
     <string name="notification_danmaku">Danmaku</string>
