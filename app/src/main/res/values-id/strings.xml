@@ -70,7 +70,7 @@
     <string name="per_app_unregister">Remove %1$s from library</string>
     <string name="adb_disabled_summary">Temporary disable USB ADB debugging while in-game</string>
     <string name="adb_disabled_title">Disable USB debugging</string>
-    <string name="ram_usage">RAM usage: </string>
+    <string name="ram_usage">Pengunaan Ram </string>
     <!-- Notification Mode -->
     <string name="notification_mode_title">Notification mode</string>
     <string name="notification_mode_hide">Do not show</string>
@@ -115,7 +115,7 @@
     <string name="display_gestures">Display &amp; Gestures</string>
     <string name="no_games_added">No games added yet</string>
     <string name="ok">OK</string>
-    <string name="cancel">Cancel</string>
+    <string name="cancel">Batal</string>
     <string name="remove">Remove</string>
     <string name="back">Back</string>
     <string name="game_mode">Game Mode</string>
@@ -133,7 +133,7 @@
     <string name="game_mode_performance">Performance</string>
     <string name="game_mode_battery">Battery</string>
     <!-- Game Panel -->
-    <string name="save">Save</string>
+    <string name="save">Simpan</string>
     <string name="panel_options">Panel Options</string>
     <string name="brightness_slider">Brightness Slider</string>
     <string name="fps_graph">FPS Graph</string>
