@@ -118,9 +118,9 @@
     <string name="cancel">キャンセル</string>
     <string name="remove">削除</string>
     <string name="back">戻る</string>
-    <string name="game_mode">Game Mode</string>
-    <string name="graphics">Graphics</string>
-    <string name="remove_from_library">Remove from library</string>
+    <string name="game_mode">ゲームモード</string>
+    <string name="graphics">グラフィック</string>
+    <string name="remove_from_library">ライブラリから削除</string>
     <string name="registered_game">Registered Game</string>
     <string name="game_space">Game Space</string>
     <!-- Ringer Mode Options -->
@@ -136,10 +136,10 @@
     <string name="save">保存</string>
     <string name="panel_options">Panel Options</string>
     <string name="brightness_slider">明るさスライダー</string>
-    <string name="fps_graph">FPS Graph</string>
-    <string name="selected_tiles">Selected Tiles</string>
-    <string name="available_tiles">Available Tiles</string>
-    <string name="fps_stats">min %1$d | avg %2$d | max %3$d</string>
+    <string name="fps_graph">FPS グラフ</string>
+    <string name="selected_tiles">選択したタイル</string>
+    <string name="available_tiles">利用可能なタイル</string>
+    <string name="fps_stats">分 %1$d | 平均 %2$d | 最大 %3$d</string>
     <string name="add">追加</string>
     <!-- Tile Labels -->
     <string name="tile_danmaku">Danmaku</string>
