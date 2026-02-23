@@ -34,14 +34,14 @@
     <string name="three_screenshot_disabled_title">Disable three fingers swipe gesture</string>
     <string name="chaldea">chaldeaprjkt</string>
     <string name="state_enabled">Enabled</string>
-    <string name="state_disabled">Disabled</string>
+    <string name="state_disabled">Dinonaktifkan</string>
     <string name="state_default">Default</string>
     <!-- Game Mode Name - sorted by GameManager's enum, do not modify the sequence! -->
     <string name="game_mode_title">Mode</string>
     <string-array name="game_mode_names">
         <item>Unsupported</item>
         <item>Standar</item>
-        <item>Performance</item>
+        <item>Performa</item>
         <item>Baterai</item>
     </string-array>
     <string name="fps_Info_title">FPS Info</string>
@@ -61,7 +61,7 @@
     <string name="per_app_mode_title">Mode pilihan</string>
     <string-array name="per_app_preferred_mode_entries">
         <item>Standar</item>
-        <item>Performance</item>
+        <item>Performa</item>
         <item>Baterai</item>
     </string-array>
     <string name="per_app_angle_title">Gunakan ANGLE (eksperimental)</string>
@@ -130,7 +130,7 @@
     <string name="ringer_mode_no_change">Jangan ubah</string>
     <!-- Game Mode Labels -->
     <string name="game_mode_standard">Standar</string>
-    <string name="game_mode_performance">Performance</string>
+    <string name="game_mode_performance">Performa</string>
     <string name="game_mode_battery">Baterai</string>
     <!-- Game Panel -->
     <string name="save">Simpan</string>
@@ -158,7 +158,7 @@
     <string name="cd_reject">Reject</string>
     <string name="cd_accept">Accept</string>
     <string name="cd_caller_photo">Caller photo</string>
-    <string name="cd_dismiss">Dismiss</string>
+    <string name="cd_dismiss">Abaikan</string>
     <string name="cd_edit_tiles">Edit Tiles</string>
     <string name="cd_collapse">Collapse</string>
     <string name="cd_expand">Expand</string>
