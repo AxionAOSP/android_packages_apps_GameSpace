@@ -94,7 +94,7 @@
     <!-- Custom seekbar -->
     <string name="custom_seekbar_value">Nilai: <xliff:g id="v">%s</xliff:g></string>
     <string name="custom_seekbar_default_value">secara bawaan</string>
-    <string name="custom_seekbar_default_value_to_set">Nilai bawaan: <xliff:g id="v">%s</xliff:g>\nTekan lama untuk menyetel</string>
+    <string name="custom_seekbar_default_value_to_set">Nilai default: <xliff:g id="v">%s</xliff:g>\nTekan lama untuk menyetel</string>
     <string name="custom_seekbar_default_value_is_set">Nilai bawaan telah disetel</string>
     <string name="gamespace_menu_opacity_title">Tingkat opasitas menu hamparan</string>
     <!-- Bypass charging -->
