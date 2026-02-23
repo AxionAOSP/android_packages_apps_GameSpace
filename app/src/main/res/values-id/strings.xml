@@ -111,12 +111,12 @@
     <string name="collapsed">Collapsed</string>
     <string name="toggle_menu">Toggle menu</string>
     <string name="close_menu">Close menu</string>
-    <string name="notifications">Notifications</string>
+    <string name="notifications">Notifikasi</string>
     <string name="display_gestures">Display &amp; Gestures</string>
     <string name="no_games_added">No games added yet</string>
     <string name="ok">OK</string>
     <string name="cancel">Batal</string>
-    <string name="remove">Remove</string>
+    <string name="remove">Hapus</string>
     <string name="back">Back</string>
     <string name="game_mode">Game Mode</string>
     <string name="graphics">Graphics</string>
@@ -140,7 +140,7 @@
     <string name="selected_tiles">Selected Tiles</string>
     <string name="available_tiles">Available Tiles</string>
     <string name="fps_stats">min %1$d | avg %2$d | max %3$d</string>
-    <string name="add">Add</string>
+    <string name="add">Tambah</string>
     <!-- Tile Labels -->
     <string name="tile_danmaku">Danmaku</string>
     <string name="tile_stay_awake">Tetap bangun</string>
