@@ -77,7 +77,7 @@
     <string name="notification_mode_headsup">Tampilkan sebagai notifikasi mengambang</string>
     <string name="notification_mode_reticker">Tampilkan sebagai reTicker</string>
     <string name="notification_mode_danmaku">Tampilkan sebagai Danmaku</string>
-    <string name="notification_hide">Hide</string>
+    <string name="notification_hide">Sembunyikan</string>
     <string name="notification_headsup">Notifikasi Mengambang</string>
     <string name="notification_reticker">reTicker</string>
     <string name="notification_danmaku">Danmaku</string>
@@ -149,11 +149,11 @@
     <string name="tile_fps_info">Info FPS</string>
     <string name="tile_auto_rotate">Putar Otomatis</string>
     <string name="tile_boost_memory">Tingkatkan Memori</string>
-    <string name="tile_settings">Pengaturan</string>
+    <string name="tile_settings">Setelan</string>
     <string name="tile_airplane_mode">Mode Pesawat</string>
     <string name="tile_bluetooth">Bluetooth</string>
     <string name="tile_mobile_data">Data Seluler</string>
-    <string name="tile_touch_boost">Touch Boost</string>
+    <string name="tile_touch_boost">Boost Sentuhan</string>
     <!-- Content Descriptions (Accessibility) -->
     <string name="cd_reject">Tolak</string>
     <string name="cd_accept">Terima</string>
