@@ -40,7 +40,7 @@
     <string name="game_mode_title">Режим</string>
     <string-array name="game_mode_names">
         <item>Unsupported</item>
-        <item>Standard</item>
+        <item>Стандарт</item>
         <item>Производительность</item>
         <item>Battery</item>
     </string-array>
@@ -60,7 +60,7 @@
     <string name="per_app_title">Configure Game</string>
     <string name="per_app_mode_title">Preferred Mode</string>
     <string-array name="per_app_preferred_mode_entries">
-        <item>Standard</item>
+        <item>Стандарт</item>
         <item>Производительность</item>
         <item>Battery</item>
     </string-array>
@@ -77,7 +77,7 @@
     <string name="notification_mode_headsup">Show as heads up</string>
     <string name="notification_mode_reticker">Show as reTicker</string>
     <string name="notification_mode_danmaku">Show as Danmaku</string>
-    <string name="notification_hide">Hide</string>
+    <string name="notification_hide">Спрятать</string>
     <string name="notification_headsup">Heads Up</string>
     <string name="notification_reticker">reTicker</string>
     <string name="notification_danmaku">Danmaku</string>
@@ -129,7 +129,7 @@
     <string name="ringer_mode_normal">Normal</string>
     <string name="ringer_mode_no_change">Do not change</string>
     <!-- Game Mode Labels -->
-    <string name="game_mode_standard">Standard</string>
+    <string name="game_mode_standard">Стандарт</string>
     <string name="game_mode_performance">Производительность</string>
     <string name="game_mode_battery">Battery</string>
     <!-- Game Panel -->
