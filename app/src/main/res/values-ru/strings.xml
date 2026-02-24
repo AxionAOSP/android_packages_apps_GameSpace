@@ -28,7 +28,7 @@
     <string name="heads_up_disabled_summary">Disable Notification heads-up while in-game</string>
     <string name="in_game_preferences_title">In-game options</string>
     <string name="game_list_title">Library</string>
-    <string name="game_remove_message">Are you sure you want to remove %1$s from your library ?</string>
+    <string name="game_remove_message">Вы уверены, что хотите удалить %1$s из своей библиотеки?</string>
     <string name="app_search_title">Поиск</string>
     <string name="three_screenshot_disabled_summary">Временно отключить жест тремя пальцами во время игры</string>
     <string name="three_screenshot_disabled_title">Отключить жест тремя пальцами</string>
@@ -101,7 +101,7 @@
     <string name="bypass_charge_enabled_summary">Bypass charging</string>
     <string name="bypass_charge_enabled_title">Enable bypass charging while playing games</string>
     <string name="gamespace_running">Game Space is running</string>
-    <string name="app_locked_message">This app is locked. Please unlock it first.</string>
+    <string name="app_locked_message">Это приложение заблокировано. Сначала разблокируйте.</string>
     <string name="call_overlay_enabled_title">Call overlay</string>
     <string name="call_overlay_enabled_summary">Show minimal call overlay to answer/reject calls</string>
     <!-- UI Strings -->
@@ -133,7 +133,7 @@
     <string name="game_mode_performance">Производительность</string>
     <string name="game_mode_battery">Battery</string>
     <!-- Game Panel -->
-    <string name="save">Сохранять</string>
+    <string name="save">Сохранить</string>
     <string name="panel_options">Panel Options</string>
     <string name="brightness_slider">Ползунок яркости</string>
     <string name="fps_graph">FPS Graph</string>
