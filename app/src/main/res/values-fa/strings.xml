@@ -29,7 +29,7 @@
     <string name="in_game_preferences_title">In-game options</string>
     <string name="game_list_title">Library</string>
     <string name="game_remove_message">Are you sure you want to remove %1$s from your library ?</string>
-    <string name="app_search_title">Search</string>
+    <string name="app_search_title">جستجو</string>
     <string name="three_screenshot_disabled_summary">Temporary disable three-fingers-swipe gesture while in-game</string>
     <string name="three_screenshot_disabled_title">Disable three fingers swipe gesture</string>
     <string name="chaldea">chaldeaprjkt</string>
@@ -111,7 +111,7 @@
     <string name="collapsed">Collapsed</string>
     <string name="toggle_menu">Toggle menu</string>
     <string name="close_menu">Close menu</string>
-    <string name="notifications">Notifications</string>
+    <string name="notifications">مژدگانی‌ها</string>
     <string name="display_gestures">Display &amp; Gestures</string>
     <string name="no_games_added">No games added yet</string>
     <string name="ok">OK</string>
@@ -140,7 +140,7 @@
     <string name="selected_tiles">Selected Tiles</string>
     <string name="available_tiles">Available Tiles</string>
     <string name="fps_stats">min %1$d | avg %2$d | max %3$d</string>
-    <string name="add">Add</string>
+    <string name="add">افزودن</string>
     <!-- Tile Labels -->
     <string name="tile_danmaku">Danmaku</string>
     <string name="tile_stay_awake">Stay Awake</string>
