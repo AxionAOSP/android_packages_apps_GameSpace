@@ -115,7 +115,7 @@
     <string name="display_gestures">Exibir Gestos &amp;</string>
     <string name="no_games_added">Nenhum jogo adicionado ainda</string>
     <string name="ok">OK</string>
-    <string name="cancel">Cancel</string>
+    <string name="cancel">Cancelar</string>
     <string name="remove">Remover</string>
     <string name="back">Back</string>
     <string name="game_mode">Modo de Jogo</string>
@@ -133,7 +133,7 @@
     <string name="game_mode_performance">Desempenho</string>
     <string name="game_mode_battery">Bateria</string>
     <!-- Game Panel -->
-    <string name="save">Save</string>
+    <string name="save">Salvar</string>
     <string name="panel_options">Opções do Painel</string>
     <string name="brightness_slider">Controle de brilho</string>
     <string name="fps_graph">Gráfico de FPS</string>
