@@ -48,7 +48,7 @@
     <string name="stay_awake_title">Mantener pantalla activa</string>
     <string name="stay_awake_summary">Mantener la pantalla encendida durante el juego</string>
     <string name="lock_gesture_title">Gesto de bloqueo</string>
-    <string name="ringer_mode_title">In-game ringer mode</string>
+    <string name="ringer_mode_title">Modo de sonido en juegos</string>
     <string-array name="ringer_mode_entries">
         <item>Silencio</item>
         <item>Vibrar</item>
@@ -75,12 +75,12 @@
     <string name="notification_mode_title">Modo de notificación</string>
     <string name="notification_mode_hide">No mostrar</string>
     <string name="notification_mode_headsup">Mostrar Notificaciones Emergentes</string>
-    <string name="notification_mode_reticker">Show as reTicker</string>
-    <string name="notification_mode_danmaku">Show as Danmaku</string>
+    <string name="notification_mode_reticker">Mostrar como Notificación Deslizable</string>
+    <string name="notification_mode_danmaku">Mostrar Notificaciones Flotantes</string>
     <string name="notification_hide">Ocultar</string>
     <string name="notification_headsup">Notificación Emergente</string>
-    <string name="notification_reticker">reTicker</string>
-    <string name="notification_danmaku">Danmaku</string>
+    <string name="notification_reticker">Notificación Deslizable</string>
+    <string name="notification_danmaku">Notificaciones Flotantes</string>
     <!-- Ringer Mode -->
     <string name="in_game_calls_title">Llamada dentro del juego</string>
     <string name="in_game_calls_no_action">Ninguna acción</string>
@@ -89,8 +89,8 @@
     <string name="in_game_calls_received_number">Llamada recibida de %1$s</string>
     <string name="in_game_calls_rejected_number">Llamada rechazada de %1$s</string>
     <!-- Danmaku Notification Mode -->
-    <string name="danmaku_notification_mode_title">Danmaku Notification mode</string>
-    <string name="danmaku_notification_mode_summary">Show notification as danmaku aka bullet comments while game is active</string>
+    <string name="danmaku_notification_mode_title">Modo de Notificaciones Flotantes</string>
+    <string name="danmaku_notification_mode_summary">Mostrar notificaciones flotantes mientras el juego este activo</string>
     <!-- Custom seekbar -->
     <string name="custom_seekbar_value">Valor: <xliff:g id="v">%s</xliff:g></string>
     <string name="custom_seekbar_default_value">predeterminado</string>
@@ -102,14 +102,14 @@
     <string name="bypass_charge_enabled_title">Habilitar la carga en modo bypass mientras juega</string>
     <string name="gamespace_running">El espacio del juego se está ejecutando</string>
     <string name="app_locked_message">Esta aplicación está bloqueada. Por favor, desbloquéala primero.</string>
-    <string name="call_overlay_enabled_title">Call overlay</string>
-    <string name="call_overlay_enabled_summary">Show minimal call overlay to answer/reject calls</string>
+    <string name="call_overlay_enabled_title">Llamada en ventana flotante</string>
+    <string name="call_overlay_enabled_summary">Usar ventana flotante compacta para responder o rechazar llamadas.</string>
     <!-- UI Strings -->
     <string name="select_apps_to_launch">Selecciona aplicaciones para iniciar rápidamente</string>
     <string name="add_game">Añadir juego</string>
     <string name="expanded">Expandir</string>
     <string name="collapsed">Contraer</string>
-    <string name="toggle_menu">Toggle menu</string>
+    <string name="toggle_menu">Mostrar/ocultar menú</string>
     <string name="close_menu">Cerrar menú</string>
     <string name="notifications">Notificaciones</string>
     <string name="display_gestures">Mostrar gestos &amp;</string>
@@ -137,12 +137,12 @@
     <string name="panel_options">Opciones del Panel</string>
     <string name="brightness_slider">Control de brillo</string>
     <string name="fps_graph">Gráfico de FPS</string>
-    <string name="selected_tiles">Selected Tiles</string>
+    <string name="selected_tiles">Seleccionar Estilos</string>
     <string name="available_tiles">Mosaicos disponibles</string>
     <string name="fps_stats">min %1$d | media %2$d | máx. %3$d</string>
     <string name="add">Añadir</string>
     <!-- Tile Labels -->
-    <string name="tile_danmaku">Danmaku</string>
+    <string name="tile_danmaku">Notificaciones Flotantes</string>
     <string name="tile_stay_awake">Mantener pantalla activa</string>
     <string name="tile_wifi">Wi-Fi</string>
     <string name="tile_dnd">No molestar</string>
