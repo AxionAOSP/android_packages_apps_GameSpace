@@ -68,7 +68,7 @@
     <string name="per_app_angle_summary">Using ANGLE renderer instead of native GLES drivers.\nWARNING!! May breaks game graphics, use with caution!</string>
     <string name="cant_find_angle_pkg">ANGLE is not available on your system</string>
     <string name="per_app_unregister">%1$s をライブラリから削除</string>
-    <string name="adb_disabled_summary">Temporary disable USB ADB debugging while in-game</string>
+    <string name="adb_disabled_summary">ゲーム中に USB ADB デバッグを一時的に無効化</string>
     <string name="adb_disabled_title">USB デバッグを無効化</string>
     <string name="ram_usage">RAM 使用量: </string>
     <!-- Notification Mode -->
