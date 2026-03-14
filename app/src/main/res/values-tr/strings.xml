@@ -90,16 +90,16 @@
     <string name="in_game_calls_rejected_number">%1$s kullanıcısının araması reddedildi</string>
     <!-- Danmaku Notification Mode -->
     <string name="danmaku_notification_mode_title">Danmaku Bildirim modu</string>
-    <string name="danmaku_notification_mode_summary">Oyun aktifken danmaku aka bullet yorumları olarak bildirim göster</string>
+    <string name="danmaku_notification_mode_summary">Oyun etkinken bildirimleri danmaku namıdiğer uçan yorumlar olarak göster</string>
     <!-- Custom seekbar -->
-    <string name="custom_seekbar_value">Value: <xliff:g id="v">%s</xliff:g></string>
-    <string name="custom_seekbar_default_value">by default</string>
-    <string name="custom_seekbar_default_value_to_set">Default value: <xliff:g id="v">%s</xliff:g>\nLong tap to set</string>
-    <string name="custom_seekbar_default_value_is_set">Default value is set</string>
-    <string name="gamespace_menu_opacity_title">Overlay menu opacity level</string>
+    <string name="custom_seekbar_value">Değer: <xliff:g id="v">%s</xliff:g></string>
+    <string name="custom_seekbar_default_value">varsayılan olarak</string>
+    <string name="custom_seekbar_default_value_to_set">Varsayılan değer: <xliff:g id="v">%s</xliff:g>\nAyarlamak için uzun basın</string>
+    <string name="custom_seekbar_default_value_is_set">Varsayılan değer ayarlandı</string>
+    <string name="gamespace_menu_opacity_title">Arayüz menüsü şeffaflık seviyesi</string>
     <!-- Bypass charging -->
-    <string name="bypass_charge_enabled_summary">Bypass charging</string>
-    <string name="bypass_charge_enabled_title">Enable bypass charging while playing games</string>
+    <string name="bypass_charge_enabled_summary">Şarjı engelle</string>
+    <string name="bypass_charge_enabled_title">Oyun oynarken şarj engellemeyi etkinleştir</string>
     <string name="gamespace_running">Game Space çalışıyor</string>
     <string name="app_locked_message">Bu uygulama kilitli. Önce kilidini açın.</string>
     <string name="call_overlay_enabled_title">Arama penceresi</string>
@@ -139,7 +139,7 @@
     <string name="fps_graph">FPS Grafiği</string>
     <string name="selected_tiles">Seçili Kareler</string>
     <string name="available_tiles">Mevcut kareler</string>
-    <string name="fps_stats">min %1$d | avg %2$d | max %3$d</string>
+    <string name="fps_stats">en az %1$d | ort %2$d | en çok %3$d</string>
     <string name="add">Ekle</string>
     <!-- Tile Labels -->
     <string name="tile_danmaku">Danmaku</string>
