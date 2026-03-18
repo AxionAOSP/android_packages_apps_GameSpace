@@ -18,11 +18,11 @@
     <string name="memory_boost">Belleği güçlendir</string>
     <string name="memory_boost_summary">Belleği optimize et</string>
     <string name="boost_memory">Bellek güçlendirildi</string>
-    <string name="quick_start_apps_title">Hızlı başlangıç uygulamaları</string>
+    <string name="quick_start_apps_title">Hızlı Başlangıç Uygulamaları</string>
     <string name="quick_start_apps_summary">Hızlı başlatmak için uygulamaları seçin</string>
-    <string name="settings_title">Game Space</string>
-    <string name="settings_summary">Oyun kurulumunuzu yönetin</string>
-    <string name="app_selector_label">Oyununuzu seçin</string>
+    <string name="settings_title">Oyun Sahası</string>
+    <string name="settings_summary">Oyun kurulumunu yönetin</string>
+    <string name="app_selector_label">Oyunu seçin</string>
     <string name="auto_brightness_disabled_title">Otomatik parlaklığı devre dışı bırakın</string>
     <string name="auto_brightness_disabled_summary">Oyun içindeyken parlaklığı sabit tutun</string>
     <string name="heads_up_disabled_summary">Oyun sırasında açılır bildirimleri devre dışı bırak</string>
@@ -57,8 +57,8 @@
     </string-array>
     <string name="suppress_fullscreen_intent_title">Tam ekran etkinliğini engelle</string>
     <string name="suppress_fullscreen_intent_summary">Oyun içindeyken gelen aramalar gibi tam ekran etkinliklerinin görünmesini engelleyin</string>
-    <string name="per_app_title">Oyunu yapılandır</string>
-    <string name="per_app_mode_title">Tercih edilen mod</string>
+    <string name="per_app_title">Oyunu Yapılandır</string>
+    <string name="per_app_mode_title">Tercih Edilen Mod</string>
     <string-array name="per_app_preferred_mode_entries">
         <item>Standart</item>
         <item>Performans</item>
@@ -78,8 +78,8 @@
     <string name="notification_mode_reticker">ReTicker olarak göster</string>
     <string name="notification_mode_danmaku">Danmaku olarak göster</string>
     <string name="notification_hide">Gizle</string>
-    <string name="notification_headsup">Açılır bildirimler</string>
-    <string name="notification_reticker">Kayan bildirim</string>
+    <string name="notification_headsup">Açılır Bildirimler</string>
+    <string name="notification_reticker">reTicker</string>
     <string name="notification_danmaku">Danmaku</string>
     <!-- Ringer Mode -->
     <string name="in_game_calls_title">Oyun içi çağrı</string>
@@ -100,7 +100,7 @@
     <!-- Bypass charging -->
     <string name="bypass_charge_enabled_summary">Şarjı engelle</string>
     <string name="bypass_charge_enabled_title">Oyun oynarken şarj engellemeyi etkinleştir</string>
-    <string name="gamespace_running">Game Space çalışıyor</string>
+    <string name="gamespace_running">Oyun Alanı çalışıyor</string>
     <string name="app_locked_message">Bu uygulama kilitli. Önce kilidini açın.</string>
     <string name="call_overlay_enabled_title">Arama penceresi</string>
     <string name="call_overlay_enabled_summary">Aramaları yanıtlamak veya reddetmek için minimal arama arayüzünü göster</string>
@@ -108,7 +108,7 @@
     <string name="select_apps_to_launch">Hızlı başlatmak için uygulamaları seçin</string>
     <string name="add_game">Oyun ekle</string>
     <string name="expanded">Genişletildi</string>
-    <string name="collapsed">Küçültüldü</string>
+    <string name="collapsed">Daraltıldı</string>
     <string name="toggle_menu">Menüyü Aç/Kapat</string>
     <string name="close_menu">Menüyü kapat</string>
     <string name="notifications">Bildirimler</string>
@@ -122,7 +122,7 @@
     <string name="graphics">Grafikler</string>
     <string name="remove_from_library">Kütüphaneden sil</string>
     <string name="registered_game">Kayıtlı Oyun</string>
-    <string name="game_space">Game Space</string>
+    <string name="game_space">Oyun Sahası</string>
     <!-- Ringer Mode Options -->
     <string name="ringer_mode_silent">Sessiz</string>
     <string name="ringer_mode_vibrate">Titreşim</string>
@@ -148,11 +148,11 @@
     <string name="tile_dnd">Zen</string>
     <string name="tile_fps_info">FPS Bilgisi</string>
     <string name="tile_auto_rotate">Otomatik Döndür</string>
-    <string name="tile_boost_memory">Belleği güçlendir</string>
+    <string name="tile_boost_memory">Belleği Güçlendir</string>
     <string name="tile_settings">Ayarlar</string>
     <string name="tile_airplane_mode">Uçak Modu</string>
     <string name="tile_bluetooth">Bluetooth</string>
-    <string name="tile_mobile_data">Mobil veri</string>
+    <string name="tile_mobile_data">Mobil Veri</string>
     <string name="tile_touch_boost">Dokunmatik ivmesi</string>
     <!-- Content Descriptions (Accessibility) -->
     <string name="cd_reject">Reddet</string>
