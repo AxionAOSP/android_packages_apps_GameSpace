@@ -137,14 +137,14 @@
     <string name="panel_options">Panel Seçenekleri</string>
     <string name="brightness_slider">Parlaklık Kaydırıcısı</string>
     <string name="fps_graph">FPS Grafiği</string>
-    <string name="selected_tiles">Seçili Kareler</string>
-    <string name="available_tiles">Mevcut kareler</string>
+    <string name="selected_tiles">Seçili Karolar</string>
+    <string name="available_tiles">Mevcut Karolar</string>
     <string name="fps_stats">en az %1$d | ort %2$d | en çok %3$d</string>
     <string name="add">Ekle</string>
     <!-- Tile Labels -->
     <string name="tile_danmaku">Danmaku</string>
     <string name="tile_stay_awake">Uyanık Kal</string>
-    <string name="tile_wifi">Wi-Fi</string>
+    <string name="tile_wifi">Kablosuz Ağ</string>
     <string name="tile_dnd">Zen</string>
     <string name="tile_fps_info">FPS Bilgisi</string>
     <string name="tile_auto_rotate">Otomatik Döndür</string>
@@ -153,13 +153,13 @@
     <string name="tile_airplane_mode">Uçak Modu</string>
     <string name="tile_bluetooth">Bluetooth</string>
     <string name="tile_mobile_data">Mobil veri</string>
-    <string name="tile_touch_boost">Dokunmatik Hızlandırma</string>
+    <string name="tile_touch_boost">Dokunmatik ivmesi</string>
     <!-- Content Descriptions (Accessibility) -->
     <string name="cd_reject">Reddet</string>
     <string name="cd_accept">Kabul et</string>
     <string name="cd_caller_photo">Arayan Fotoğrafı</string>
     <string name="cd_dismiss">Kapat</string>
-    <string name="cd_edit_tiles">Kareleri Düzenle</string>
+    <string name="cd_edit_tiles">Karoları Düzenle</string>
     <string name="cd_collapse">Daralt</string>
     <string name="cd_expand">Genişlet</string>
 </resources>
