@@ -29,19 +29,19 @@
     <string name="in_game_preferences_title">In-game options</string>
     <string name="game_list_title">Library</string>
     <string name="game_remove_message">Are you sure you want to remove %1$s from your library ?</string>
-    <string name="app_search_title">Search</string>
+    <string name="app_search_title">搜索</string>
     <string name="three_screenshot_disabled_summary">Temporary disable three-fingers-swipe gesture while in-game</string>
     <string name="three_screenshot_disabled_title">Disable three fingers swipe gesture</string>
     <string name="chaldea">chaldeaprjkt</string>
     <string name="state_enabled">Enabled</string>
-    <string name="state_disabled">已停用</string>
+    <string name="state_disabled">已禁用</string>
     <string name="state_default">Default</string>
     <!-- Game Mode Name - sorted by GameManager's enum, do not modify the sequence! -->
-    <string name="game_mode_title">Mode</string>
+    <string name="game_mode_title">模式</string>
     <string-array name="game_mode_names">
         <item>Unsupported</item>
         <item>Standard</item>
-        <item>Performance</item>
+        <item>性能</item>
         <item>Battery</item>
     </string-array>
     <string name="fps_Info_title">FPS Info</string>
@@ -52,7 +52,7 @@
     <string-array name="ringer_mode_entries">
         <item>Silent</item>
         <item>Vibrate</item>
-        <item>Normal</item>
+        <item>标准</item>
         <item>Do not change</item>
     </string-array>
     <string name="suppress_fullscreen_intent_title">Block fullscreen event</string>
@@ -61,7 +61,7 @@
     <string name="per_app_mode_title">Preferred Mode</string>
     <string-array name="per_app_preferred_mode_entries">
         <item>Standard</item>
-        <item>Performance</item>
+        <item>性能</item>
         <item>Battery</item>
     </string-array>
     <string name="per_app_angle_title">Use ANGLE (experimental)</string>
@@ -77,7 +77,7 @@
     <string name="notification_mode_headsup">Show as heads up</string>
     <string name="notification_mode_reticker">Show as reTicker</string>
     <string name="notification_mode_danmaku">Show as Danmaku</string>
-    <string name="notification_hide">Hide</string>
+    <string name="notification_hide">隐藏</string>
     <string name="notification_headsup">Heads Up</string>
     <string name="notification_reticker">reTicker</string>
     <string name="notification_danmaku">Danmaku</string>
@@ -111,12 +111,12 @@
     <string name="collapsed">Collapsed</string>
     <string name="toggle_menu">Toggle menu</string>
     <string name="close_menu">Close menu</string>
-    <string name="notifications">Notifications</string>
+    <string name="notifications">通知</string>
     <string name="display_gestures">Display &amp; Gestures</string>
     <string name="no_games_added">No games added yet</string>
-    <string name="ok">OK</string>
+    <string name="ok">确定</string>
     <string name="cancel">Cancel</string>
-    <string name="remove">Remove</string>
+    <string name="remove">移除</string>
     <string name="back">Back</string>
     <string name="game_mode">Game Mode</string>
     <string name="graphics">Graphics</string>
@@ -126,21 +126,21 @@
     <!-- Ringer Mode Options -->
     <string name="ringer_mode_silent">Silent</string>
     <string name="ringer_mode_vibrate">Vibrate</string>
-    <string name="ringer_mode_normal">Normal</string>
+    <string name="ringer_mode_normal">标准</string>
     <string name="ringer_mode_no_change">Do not change</string>
     <!-- Game Mode Labels -->
     <string name="game_mode_standard">Standard</string>
-    <string name="game_mode_performance">Performance</string>
+    <string name="game_mode_performance">性能</string>
     <string name="game_mode_battery">Battery</string>
     <!-- Game Panel -->
     <string name="save">Save</string>
     <string name="panel_options">Panel Options</string>
-    <string name="brightness_slider">Brightness Slider</string>
+    <string name="brightness_slider">亮度滑块</string>
     <string name="fps_graph">FPS Graph</string>
     <string name="selected_tiles">Selected Tiles</string>
     <string name="available_tiles">Available Tiles</string>
     <string name="fps_stats">min %1$d | avg %2$d | max %3$d</string>
-    <string name="add">Add</string>
+    <string name="add">添加</string>
     <!-- Tile Labels -->
     <string name="tile_danmaku">Danmaku</string>
     <string name="tile_stay_awake">Stay Awake</string>
@@ -149,17 +149,17 @@
     <string name="tile_fps_info">FPS Info</string>
     <string name="tile_auto_rotate">Auto Rotate</string>
     <string name="tile_boost_memory">Boost Memory</string>
-    <string name="tile_settings">設定</string>
+    <string name="tile_settings">设置</string>
     <string name="tile_airplane_mode">Airplane Mode</string>
-    <string name="tile_bluetooth">Bluetooth</string>
+    <string name="tile_bluetooth">蓝牙</string>
     <string name="tile_mobile_data">Mobile Data</string>
-    <string name="tile_touch_boost">Touch Boost</string>
+    <string name="tile_touch_boost">触摸加速</string>
     <!-- Content Descriptions (Accessibility) -->
-    <string name="cd_reject">拒絕</string>
-    <string name="cd_accept">接受</string>
+    <string name="cd_reject">Reject</string>
+    <string name="cd_accept">Accept</string>
     <string name="cd_caller_photo">Caller photo</string>
-    <string name="cd_dismiss">Dismiss</string>
+    <string name="cd_dismiss">忽略</string>
     <string name="cd_edit_tiles">Edit Tiles</string>
-    <string name="cd_collapse">收合</string>
-    <string name="cd_expand">展開</string>
+    <string name="cd_collapse">收起</string>
+    <string name="cd_expand">展开</string>
 </resources>
