@@ -176,33 +176,33 @@
     <string name="tile_color_inversion">颜色反转</string>
     <string name="tile_color_correction">色彩校正</string>
     <string name="tile_reduce_brightness">降低亮度</string>
-    <string name="tile_one_handed">One Handed</string>
+    <string name="tile_one_handed">单手模式</string>
     <string name="tile_heads_up">浮动通知</string>
-    <string name="tile_auto_sync">Auto Sync</string>
+    <string name="tile_auto_sync">自动同步</string>
     <string name="tile_camera_privacy">相机</string>
-    <string name="tile_mic_privacy">Microphone</string>
-    <string name="tile_work_profile">Work Profile</string>
-    <string name="tile_usb_tether">USB Tethering</string>
-    <string name="tile_dream">Screen Saver</string>
-    <string name="tile_reading_mode">Reading Mode</string>
-    <string name="tile_power_share">Power Share</string>
-    <string name="tile_caffeine">Caffeine</string>
+    <string name="tile_mic_privacy">麦克风</string>
+    <string name="tile_work_profile">工作资料</string>
+    <string name="tile_usb_tether">USB 数据共享</string>
+    <string name="tile_dream">屏幕保护</string>
+    <string name="tile_reading_mode">阅读模式</string>
+    <string name="tile_power_share">电源共享</string>
+    <string name="tile_caffeine">屏幕常亮</string>
     <string name="tile_vpn">VPN</string>
-    <string name="tile_cast">Cast</string>
-    <string name="tile_profiles">Profiles</string>
-    <string name="tile_smart_pixels">Smart Pixels</string>
-    <string name="tile_screen_record">Screen Record</string>
+    <string name="tile_cast">投屏</string>
+    <string name="tile_profiles">资料</string>
+    <string name="tile_smart_pixels">智能像素</string>
+    <string name="tile_screen_record">屏幕录制</string>
     <string name="tile_screenshot">截图</string>
     <!-- Icon Idle Transparency -->
-    <string name="icon_idle_alpha_title">Icon idle transparency</string>
+    <string name="icon_idle_alpha_title">图标闲置透明度</string>
     <!-- Auto DND -->
-    <string name="auto_dnd_title">Auto Do Not Disturb</string>
-    <string name="auto_dnd_summary">Automatically enable DND while in-game and restore when done</string>
+    <string name="auto_dnd_title">自动勿扰模式</string>
+    <string name="auto_dnd_summary">在游戏中自动启用 DND 并在完成后恢复</string>
     <!-- Controller Mapper -->
-    <string name="mapper_press_button">Press a button on your controller or keyboard\u2026</string>
-    <string name="mapper_add_point">Add tap point</string>
-    <string name="mapper_delete_point">Delete tap point</string>
-    <string name="mapper_map_controls">Map controls</string>
+    <string name="mapper_press_button">点击控制器上的按钮或按键\u2026</string>
+    <string name="mapper_add_point">添加触摸点</string>
+    <string name="mapper_delete_point">删除触摸点</string>
+    <string name="mapper_map_controls">地图控制</string>
     <!-- Content Descriptions (Accessibility) -->
     <string name="cd_reject">拒绝</string>
     <string name="cd_accept">接受</string>
