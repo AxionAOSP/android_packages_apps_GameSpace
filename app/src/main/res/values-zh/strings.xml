@@ -15,9 +15,9 @@
     limitations under the License.
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="memory_boost">增強記憶體</string>
+    <string name="memory_boost">記憶體加速</string>
     <string name="memory_boost_summary">優化記憶體</string>
-    <string name="boost_memory">記憶體已增強</string>
+    <string name="boost_memory">記憶體已加速</string>
     <string name="quick_start_apps_title">快速啟動應用程式</string>
     <string name="quick_start_apps_summary">選擇要快速啟動的應用程式</string>
     <string name="settings_title">Game Space</string>
@@ -29,7 +29,7 @@
     <string name="in_game_preferences_title">遊戲內選項</string>
     <string name="game_list_title">遊戲庫</string>
     <string name="game_remove_message">確定要將 %1$s 從遊戲庫移除嗎？</string>
-    <string name="app_search_title">Search</string>
+    <string name="app_search_title">搜尋</string>
     <string name="three_screenshot_disabled_summary">在遊戲期間暫時停用三指滑動手勢</string>
     <string name="three_screenshot_disabled_title">停用三指滑動手勢</string>
     <string name="chaldea">chaldeaprjkt</string>
@@ -64,7 +64,7 @@
         <item>效能</item>
         <item>省電</item>
     </string-array>
-    <string name="per_app_angle_title">图像驱动</string>
+    <string name="per_app_angle_title">圖形驅動程式</string>
     <string name="per_app_unregister">從遊戲庫中移除 %1$s</string>
     <string name="adb_disabled_summary">在遊戲期間暫時停用 USB ADB 偵錯</string>
     <string name="adb_disabled_title">停用 USB 偵錯</string>
@@ -104,22 +104,22 @@
     <string name="call_overlay_enabled_summary">顯示最小來電覆蓋以接聽/拒接來電</string>
     <!-- UI Strings -->
     <string name="select_apps_to_launch">選擇要快速啟動的應用程式</string>
-    <string name="add_game">Add game</string>
-    <string name="expanded">Expanded</string>
-    <string name="collapsed">Collapsed</string>
-    <string name="toggle_menu">Toggle menu</string>
-    <string name="close_menu">Close menu</string>
-    <string name="notifications">Notifications</string>
-    <string name="display_gestures">Display &amp; Gestures</string>
-    <string name="no_games_added">No games added yet</string>
+    <string name="add_game">新增遊戲</string>
+    <string name="expanded">已展開</string>
+    <string name="collapsed">已收起</string>
+    <string name="toggle_menu">切換選單</string>
+    <string name="close_menu">關閉選單</string>
+    <string name="notifications">通知</string>
+    <string name="display_gestures">顯示及手勢</string>
+    <string name="no_games_added">尚未新增任何遊戲</string>
     <string name="ok">確定</string>
     <string name="cancel">Cancel</string>
-    <string name="remove">Remove</string>
+    <string name="remove">移除</string>
     <string name="back">Back</string>
-    <string name="game_mode">Game Mode</string>
-    <string name="graphics">Graphics</string>
-    <string name="remove_from_library">Remove from library</string>
-    <string name="registered_game">Registered Game</string>
+    <string name="game_mode">遊戲模式</string>
+    <string name="graphics">圖形</string>
+    <string name="remove_from_library">從遊戲庫移除</string>
+    <string name="registered_game">已註冊的遊戲</string>
     <string name="game_space">Game Space</string>
     <!-- Ringer Mode Options -->
     <string name="ringer_mode_silent">靜音</string>
@@ -132,15 +132,15 @@
     <string name="game_mode_battery">省電</string>
     <!-- Game Panel -->
     <string name="save">Save</string>
-    <string name="panel_options">Panel Options</string>
+    <string name="panel_options">面板選項</string>
     <string name="brightness_slider">亮度滑桿</string>
-    <string name="fps_graph">FPS Graph</string>
-    <string name="selected_tiles">Selected Tiles</string>
-    <string name="available_tiles">Available Tiles</string>
-    <string name="drag_tiles_here">拖动磁贴到此处</string>
-    <string name="all_tiles_added">已添加所有磁贴</string>
-    <string name="fps_stats">min %1$d | avg %2$d | max %3$d</string>
-    <string name="add">Add</string>
+    <string name="fps_graph">FPS 圖表</string>
+    <string name="selected_tiles">已選的快捷按鈕</string>
+    <string name="available_tiles">可用的快捷按鈕</string>
+    <string name="drag_tiles_here">拖曳快捷按鈕到此處</string>
+    <string name="all_tiles_added">已新增所有快捷按鈕</string>
+    <string name="fps_stats">最小 %1$d | 平均 %2$d | 最大 %3$d</string>
+    <string name="add">新增</string>
     <string name="view_details">查看详情</string>
     <string name="launch_game">启动游戏</string>
     <string name="remove_game">移除游戏</string>
@@ -155,14 +155,14 @@
     <string name="tile_danmaku">彈幕式通知</string>
     <string name="tile_stay_awake">螢幕保持開啟</string>
     <string name="tile_wifi">Wi-Fi</string>
-    <string name="tile_dnd">DND</string>
+    <string name="tile_dnd">勿擾模式</string>
     <string name="tile_fps_info">FPS 資訊</string>
-    <string name="tile_auto_rotate">Auto Rotate</string>
-    <string name="tile_boost_memory">Boost Memory</string>
+    <string name="tile_auto_rotate">自動旋轉</string>
+    <string name="tile_boost_memory">記憶體加速</string>
     <string name="tile_settings">設定</string>
-    <string name="tile_airplane_mode">Airplane Mode</string>
+    <string name="tile_airplane_mode">飛航模式</string>
     <string name="tile_bluetooth">藍牙</string>
-    <string name="tile_mobile_data">Mobile Data</string>
+    <string name="tile_mobile_data">行動數據</string>
     <string name="tile_touch_boost">觸控加速</string>
     <string name="tile_flashlight">手電筒</string>
     <string name="tile_dark_mode">夜间模式</string>
@@ -206,9 +206,9 @@
     <!-- Content Descriptions (Accessibility) -->
     <string name="cd_reject">拒絕</string>
     <string name="cd_accept">接受</string>
-    <string name="cd_caller_photo">Caller photo</string>
+    <string name="cd_caller_photo">來電者相片</string>
     <string name="cd_dismiss">Dismiss</string>
-    <string name="cd_edit_tiles">Edit Tiles</string>
+    <string name="cd_edit_tiles">編輯快捷按鈕</string>
     <string name="cd_collapse">收合</string>
     <string name="cd_expand">展開</string>
 </resources>
