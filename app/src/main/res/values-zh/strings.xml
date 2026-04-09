@@ -41,7 +41,7 @@
     <string-array name="game_mode_names">
         <item>Unsupported</item>
         <item>Standard</item>
-        <item>Performance</item>
+        <item>效能</item>
         <item>Battery</item>
     </string-array>
     <string name="fps_Info_title">FPS Info</string>
@@ -61,7 +61,7 @@
     <string name="per_app_mode_title">Preferred Mode</string>
     <string-array name="per_app_preferred_mode_entries">
         <item>Standard</item>
-        <item>Performance</item>
+        <item>效能</item>
         <item>Battery</item>
     </string-array>
     <string name="per_app_angle_title">图像驱动</string>
@@ -128,7 +128,7 @@
     <string name="ringer_mode_no_change">Do not change</string>
     <!-- Game Mode Labels -->
     <string name="game_mode_standard">Standard</string>
-    <string name="game_mode_performance">Performance</string>
+    <string name="game_mode_performance">效能</string>
     <string name="game_mode_battery">Battery</string>
     <!-- Game Panel -->
     <string name="save">Save</string>
