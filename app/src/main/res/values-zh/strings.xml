@@ -37,7 +37,7 @@
     <string name="state_disabled">已停用</string>
     <string name="state_default">Default</string>
     <!-- Game Mode Name - sorted by GameManager's enum, do not modify the sequence! -->
-    <string name="game_mode_title">Mode</string>
+    <string name="game_mode_title">模式</string>
     <string-array name="game_mode_names">
         <item>Unsupported</item>
         <item>Standard</item>
@@ -133,7 +133,7 @@
     <!-- Game Panel -->
     <string name="save">Save</string>
     <string name="panel_options">Panel Options</string>
-    <string name="brightness_slider">Brightness Slider</string>
+    <string name="brightness_slider">亮度滑桿</string>
     <string name="fps_graph">FPS Graph</string>
     <string name="selected_tiles">Selected Tiles</string>
     <string name="available_tiles">Available Tiles</string>
@@ -163,15 +163,15 @@
     <string name="tile_airplane_mode">Airplane Mode</string>
     <string name="tile_bluetooth">蓝牙</string>
     <string name="tile_mobile_data">Mobile Data</string>
-    <string name="tile_touch_boost">Touch Boost</string>
-    <string name="tile_flashlight">Flashlight</string>
+    <string name="tile_touch_boost">觸控加速</string>
+    <string name="tile_flashlight">手電筒</string>
     <string name="tile_dark_mode">夜间模式</string>
     <string name="tile_location">位置</string>
     <string name="tile_battery_saver">省电模式</string>
     <string name="tile_hotspot">热点</string>
     <string name="tile_nfc">NFC</string>
     <string name="tile_night_light">夜灯</string>
-    <string name="tile_aod">Always On Display</string>
+    <string name="tile_aod">螢幕長亮模式</string>
     <string name="tile_data_saver">省流模式</string>
     <string name="tile_color_inversion">颜色反转</string>
     <string name="tile_color_correction">色彩校正</string>
@@ -192,7 +192,7 @@
     <string name="tile_profiles">资料</string>
     <string name="tile_smart_pixels">智能像素</string>
     <string name="tile_screen_record">屏幕录制</string>
-    <string name="tile_screenshot">Screenshot</string>
+    <string name="tile_screenshot">螢幕截圖</string>
     <!-- Icon Idle Transparency -->
     <string name="icon_idle_alpha_title">图标闲置透明度</string>
     <!-- Auto DND -->
