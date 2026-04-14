@@ -64,7 +64,7 @@
         <item>Performans</item>
         <item>Pil</item>
     </string-array>
-    <string name="per_app_angle_title">Graphics driver</string>
+    <string name="per_app_angle_title">Grafik sürücüsü</string>
     <string name="per_app_unregister">%1$s kütüphaneden kaldır</string>
     <string name="adb_disabled_summary">Oyun sırasında USB ADB hata ayıklamasını geçici olarak devre dışı bırakın</string>
     <string name="adb_disabled_title">USB hata ayıklamasını devre dışı bırak</string>
@@ -137,20 +137,20 @@
     <string name="fps_graph">FPS Grafiği</string>
     <string name="selected_tiles">Seçili Karolar</string>
     <string name="available_tiles">Mevcut Karolar</string>
-    <string name="drag_tiles_here">Drag tiles here</string>
-    <string name="all_tiles_added">All tiles added</string>
+    <string name="drag_tiles_here">Kutucukları buraya sürükleyin</string>
+    <string name="all_tiles_added">Tüm kutucuklar eklendi</string>
     <string name="fps_stats">en az %1$d | ort %2$d | en çok %3$d</string>
     <string name="add">Ekle</string>
-    <string name="view_details">View Details</string>
-    <string name="launch_game">Launch Game</string>
-    <string name="remove_game">Remove Game</string>
-    <string name="empty_library">No games in your library</string>
-    <string name="add_first_game">Add Your First Game</string>
-    <string name="per_app_settings">Game Settings</string>
-    <string name="search_apps">Search apps\u2026</string>
+    <string name="view_details">Ayrıntıları Görüntüle</string>
+    <string name="launch_game">Oyunu Başlat</string>
+    <string name="remove_game">Oyunu Kaldır</string>
+    <string name="empty_library">Kitaplığınızda oyun yok</string>
+    <string name="add_first_game">İlk Oyununuzu Ekleyin</string>
+    <string name="per_app_settings">Oyun Ayarları</string>
+    <string name="search_apps">Uygulamalarda ara\u2026</string>
     <string name="about_github">GitHub</string>
-    <string name="about_translate">Translate</string>
-    <string name="about_donate">Donate</string>
+    <string name="about_translate">Çevir</string>
+    <string name="about_donate">Bağış Yap</string>
     <!-- Tile Labels -->
     <string name="tile_danmaku">Danmaku</string>
     <string name="tile_stay_awake">Uyanık Kal</string>
@@ -165,15 +165,15 @@
     <string name="tile_mobile_data">Mobil Veri</string>
     <string name="tile_touch_boost">Dokunmatik ivmesi</string>
     <string name="tile_flashlight">El feneri</string>
-    <string name="tile_dark_mode">Dark Mode</string>
-    <string name="tile_location">Location</string>
-    <string name="tile_battery_saver">Battery Saver</string>
+    <string name="tile_dark_mode">Koyu Mod</string>
+    <string name="tile_location">Konum</string>
+    <string name="tile_battery_saver">Pil Tasarrufu</string>
     <string name="tile_hotspot">Erişim Noktası</string>
     <string name="tile_nfc">NFC</string>
-    <string name="tile_night_light">Night Light</string>
+    <string name="tile_night_light">Gece Işığı</string>
     <string name="tile_aod">Her Zaman Açık Ekran</string>
-    <string name="tile_data_saver">Data Saver</string>
-    <string name="tile_color_inversion">Color Inversion</string>
+    <string name="tile_data_saver">Veri Tasarrufu</string>
+    <string name="tile_color_inversion">Rengi Ters Çevirme</string>
     <string name="tile_color_correction">Color Correction</string>
     <string name="tile_reduce_brightness">Reduce Brightness</string>
     <string name="tile_one_handed">One Handed</string>
