@@ -15,23 +15,23 @@
     limitations under the License.
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="memory_boost">Boost memory</string>
+    <string name="memory_boost">Acelerar memória</string>
     <string name="memory_boost_summary">Otimizar memória</string>
     <string name="boost_memory">Memória otimizada</string>
-    <string name="quick_start_apps_title">Quick Start Apps</string>
-    <string name="quick_start_apps_summary">Select apps to launch quickly</string>
+    <string name="quick_start_apps_title">Aplicativos de início rápido</string>
+    <string name="quick_start_apps_summary">Selecione os apps de iniciar rapidamente</string>
     <string name="settings_title">Espaço de Jogos</string>
-    <string name="settings_summary">Manage your gaming setup</string>
-    <string name="app_selector_label">Pick your game</string>
+    <string name="settings_summary">Gerencie sua configuração de jogos</string>
+    <string name="app_selector_label">Seleciona o jogo</string>
     <string name="auto_brightness_disabled_title">Desativar brilho automático</string>
-    <string name="auto_brightness_disabled_summary">Keep brightness settled while in-game</string>
-    <string name="heads_up_disabled_summary">Disable Notification heads-up while in-game</string>
-    <string name="in_game_preferences_title">In-game options</string>
+    <string name="auto_brightness_disabled_summary">Mantenha o brilho estável durante o jogo</string>
+    <string name="heads_up_disabled_summary">Desativar notificações heads-up durante o jogo</string>
+    <string name="in_game_preferences_title">Opções do jogo</string>
     <string name="game_list_title">Biblioteca</string>
-    <string name="game_remove_message">Are you sure you want to remove %1$s from your library ?</string>
+    <string name="game_remove_message">Tem certeza de que deseja remover %1$s da sua biblioteca?</string>
     <string name="app_search_title">Pesquisa</string>
-    <string name="three_screenshot_disabled_summary">Temporary disable three-fingers-swipe gesture while in-game</string>
-    <string name="three_screenshot_disabled_title">Disable three fingers swipe gesture</string>
+    <string name="three_screenshot_disabled_summary">Desativar temporariamente o gesto de três dedos para capturar a tela durante o jogo</string>
+    <string name="three_screenshot_disabled_title">Desativar gesto de deslizar três dedos</string>
     <string name="chaldea">chaldeaprjkt</string>
     <string name="state_enabled">Habilitado</string>
     <string name="state_disabled">Desativado</string>
@@ -40,13 +40,13 @@
     <string name="game_mode_title">Modo</string>
     <string-array name="game_mode_names">
         <item>Não suportado</item>
-        <item>Standard</item>
+        <item>Padrão</item>
         <item>Desempenho</item>
         <item>Bateria</item>
     </string-array>
-    <string name="fps_Info_title">FPS Info</string>
-    <string name="stay_awake_title">Stay Awake</string>
-    <string name="stay_awake_summary">Keep screen awake while in the game</string>
+    <string name="fps_Info_title">Informação de FPS</string>
+    <string name="stay_awake_title">Mantenha-se Acordado</string>
+    <string name="stay_awake_summary">Mantenha a tela ligada quando estiver no jogo</string>
     <string name="lock_gesture_title">Lock gesture</string>
     <string name="ringer_mode_title">In-game ringer mode</string>
     <string-array name="ringer_mode_entries">
@@ -60,7 +60,7 @@
     <string name="per_app_title">Configurar o jogo</string>
     <string name="per_app_mode_title">Modo de preferência</string>
     <string-array name="per_app_preferred_mode_entries">
-        <item>Standard</item>
+        <item>Padrão</item>
         <item>Desempenho</item>
         <item>Bateria</item>
     </string-array>
@@ -103,7 +103,7 @@
     <string name="call_overlay_enabled_title">Call overlay</string>
     <string name="call_overlay_enabled_summary">Show minimal call overlay to answer/reject calls</string>
     <!-- UI Strings -->
-    <string name="select_apps_to_launch">Select apps to launch quickly</string>
+    <string name="select_apps_to_launch">Selecione os apps de iniciar rapidamente</string>
     <string name="add_game">Add game</string>
     <string name="expanded">Expanded</string>
     <string name="collapsed">Collapsed</string>
@@ -127,7 +127,7 @@
     <string name="ringer_mode_normal">Normal</string>
     <string name="ringer_mode_no_change">Não alterar</string>
     <!-- Game Mode Labels -->
-    <string name="game_mode_standard">Standard</string>
+    <string name="game_mode_standard">Padrão</string>
     <string name="game_mode_performance">Desempenho</string>
     <string name="game_mode_battery">Bateria</string>
     <!-- Game Panel -->
@@ -153,10 +153,10 @@
     <string name="about_donate">Donate</string>
     <!-- Tile Labels -->
     <string name="tile_danmaku">Danmaku</string>
-    <string name="tile_stay_awake">Stay Awake</string>
+    <string name="tile_stay_awake">Mantenha-se Acordado</string>
     <string name="tile_wifi">Wi-Fi</string>
     <string name="tile_dnd">Não perturbe</string>
-    <string name="tile_fps_info">FPS Info</string>
+    <string name="tile_fps_info">Informação de FPS</string>
     <string name="tile_auto_rotate">Rotação automática</string>
     <string name="tile_boost_memory">Aumentar memória</string>
     <string name="tile_settings">Configurações</string>
