@@ -34,7 +34,7 @@
     <string name="three_screenshot_disabled_title">Disable three fingers swipe gesture</string>
     <string name="chaldea">chaldeaprjkt</string>
     <string name="state_enabled">Enabled</string>
-    <string name="state_disabled">Disabled</string>
+    <string name="state_disabled">מושבת</string>
     <string name="state_default">Default</string>
     <!-- Game Mode Name - sorted by GameManager's enum, do not modify the sequence! -->
     <string name="game_mode_title">Mode</string>
@@ -75,7 +75,7 @@
     <string name="notification_mode_headsup">Show as heads up</string>
     <string name="notification_mode_reticker">Show as reTicker</string>
     <string name="notification_mode_danmaku">Show as Danmaku</string>
-    <string name="notification_hide">Hide</string>
+    <string name="notification_hide">הסתרה</string>
     <string name="notification_headsup">Heads Up</string>
     <string name="notification_reticker">reTicker</string>
     <string name="notification_danmaku">Danmaku</string>
@@ -164,7 +164,7 @@
     <string name="tile_bluetooth">Bluetooth</string>
     <string name="tile_mobile_data">Mobile Data</string>
     <string name="tile_touch_boost">Touch Boost</string>
-    <string name="tile_flashlight">Flashlight</string>
+    <string name="tile_flashlight">פנס</string>
     <string name="tile_dark_mode">Dark Mode</string>
     <string name="tile_location">Location</string>
     <string name="tile_battery_saver">Battery Saver</string>
@@ -192,7 +192,7 @@
     <string name="tile_profiles">Profiles</string>
     <string name="tile_smart_pixels">Smart Pixels</string>
     <string name="tile_screen_record">Screen Record</string>
-    <string name="tile_screenshot">Screenshot</string>
+    <string name="tile_screenshot">צילום מסך</string>
     <!-- Icon Idle Transparency -->
     <string name="icon_idle_alpha_title">Icon idle transparency</string>
     <!-- Auto DND -->
