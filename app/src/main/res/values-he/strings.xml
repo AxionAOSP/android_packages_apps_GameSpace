@@ -140,7 +140,7 @@
     <string name="drag_tiles_here">Drag tiles here</string>
     <string name="all_tiles_added">All tiles added</string>
     <string name="fps_stats">min %1$d | avg %2$d | max %3$d</string>
-    <string name="add">Add</string>
+    <string name="add">הוספה</string>
     <string name="view_details">View Details</string>
     <string name="launch_game">Launch Game</string>
     <string name="remove_game">Remove Game</string>
