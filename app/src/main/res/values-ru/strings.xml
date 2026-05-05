@@ -66,7 +66,7 @@
     </string-array>
     <string name="per_app_angle_title">Графический драйвер</string>
     <string name="per_app_unregister">Удалить %1$s из библиотеки</string>
-    <string name="adb_disabled_summary">Временное отключение </string>
+    <string name="adb_disabled_summary">Отключать отладку по USB во время игры</string>
     <string name="adb_disabled_title">Отключить отладку USB</string>
     <string name="ram_usage">Использование ОЗУ: </string>
     <!-- Notification Mode -->
@@ -91,7 +91,7 @@
     <string name="danmaku_notification_mode_summary">Показывать уведомление в виде прозрачных комментариев, пока в игре</string>
     <!-- Custom seekbar -->
     <string name="custom_seekbar_value">Значение: <xliff:g id="v">%s</xliff:g></string>
-    <string name="custom_seekbar_default_value">По умолчанию</string>
+    <string name="custom_seekbar_default_value">Выбрано по умолчанию</string>
     <string name="custom_seekbar_default_value_to_set">Значение по умолчанию: <xliff:g id="v">%s</xliff:g>\nЗажмите чтобы установить</string>
     <string name="custom_seekbar_default_value_is_set">Установлено значение по умолчанию</string>
     <string name="gamespace_menu_opacity_title">Уровень прозрачности меню игрового пространства</string>
@@ -139,7 +139,7 @@
     <string name="available_tiles">Доступные плитки</string>
     <string name="drag_tiles_here">Перетащите плитки сюда</string>
     <string name="all_tiles_added">Все плитки добавлены</string>
-    <string name="fps_stats">Минимальное %1$d | среднее %2$d | максимальное %3$d</string>
+    <string name="fps_stats">Мин %1$d | сред %2$d | макс %3$d</string>
     <string name="add">Добавить</string>
     <string name="view_details">Просмотр деталей</string>
     <string name="launch_game">Запустить игру</string>
