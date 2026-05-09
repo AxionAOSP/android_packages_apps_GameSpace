@@ -99,15 +99,15 @@
     <string name="bypass_charge_enabled_summary">Carregamento Bypass</string>
     <string name="bypass_charge_enabled_title">Habilite o carregamento por bypass durante os jogos</string>
     <string name="gamespace_running">Espaço de jogo em execução</string>
-    <string name="app_locked_message">This app is locked. Please unlock it first.</string>
-    <string name="call_overlay_enabled_title">Call overlay</string>
-    <string name="call_overlay_enabled_summary">Show minimal call overlay to answer/reject calls</string>
+    <string name="app_locked_message">Este app está bloqueado. Por favor, desbloqueie-o primeiro.</string>
+    <string name="call_overlay_enabled_title">Sobreposição de chamada</string>
+    <string name="call_overlay_enabled_summary">Mostrar sobreposição de chamada mínima para atender/rejeitar chamadas</string>
     <!-- UI Strings -->
     <string name="select_apps_to_launch">Selecione os apps de iniciar rapidamente</string>
-    <string name="add_game">Add game</string>
-    <string name="expanded">Expanded</string>
-    <string name="collapsed">Collapsed</string>
-    <string name="toggle_menu">Toggle menu</string>
+    <string name="add_game">Adicionar jogo</string>
+    <string name="expanded">Expandido</string>
+    <string name="collapsed">Desabou</string>
+    <string name="toggle_menu">Abrir/fechar menu</string>
     <string name="close_menu">Fechar menu</string>
     <string name="notifications">Notificações</string>
     <string name="display_gestures">Exibir Gestos &amp;</string>
