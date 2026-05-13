@@ -168,7 +168,7 @@
     <string name="tile_dark_mode">Dark Mode</string>
     <string name="tile_location">Location</string>
     <string name="tile_battery_saver">Battery Saver</string>
-    <string name="tile_hotspot">Hotspot</string>
+    <string name="tile_hotspot">Точка доступу</string>
     <string name="tile_nfc">NFC</string>
     <string name="tile_night_light">Night Light</string>
     <string name="tile_aod">Завжди увімкнений дисплей</string>
@@ -179,7 +179,7 @@
     <string name="tile_one_handed">One Handed</string>
     <string name="tile_heads_up">Heads Up</string>
     <string name="tile_auto_sync">Auto Sync</string>
-    <string name="tile_camera_privacy">Camera</string>
+    <string name="tile_camera_privacy">Камера</string>
     <string name="tile_mic_privacy">Microphone</string>
     <string name="tile_work_profile">Work Profile</string>
     <string name="tile_usb_tether">USB Tethering</string>
