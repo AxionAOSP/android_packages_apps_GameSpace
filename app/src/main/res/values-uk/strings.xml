@@ -39,30 +39,30 @@
     <!-- Game Mode Name - sorted by GameManager's enum, do not modify the sequence! -->
     <string name="game_mode_title">Режим</string>
     <string-array name="game_mode_names">
-        <item>Unsupported</item>
-        <item>Standard</item>
+        <item>Не підтримується</item>
+        <item>Стандартний</item>
         <item>Продуктивність</item>
-        <item>Battery</item>
+        <item>Акумулятор</item>
     </string-array>
-    <string name="fps_Info_title">FPS Info</string>
-    <string name="stay_awake_title">Stay Awake</string>
-    <string name="stay_awake_summary">Keep screen awake while in the game</string>
-    <string name="lock_gesture_title">Lock gesture</string>
-    <string name="ringer_mode_title">In-game ringer mode</string>
+    <string name="fps_Info_title">Інформація про FPS</string>
+    <string name="stay_awake_title">Не засинати</string>
+    <string name="stay_awake_summary">Тримати екран активним під час гри</string>
+    <string name="lock_gesture_title">Блокувати жести</string>
+    <string name="ringer_mode_title">Режим дзвінка в грі</string>
     <string-array name="ringer_mode_entries">
-        <item>Silent</item>
-        <item>Vibrate</item>
+        <item>Режим тиші</item>
+        <item>Вібросигнал</item>
         <item>Звичайний</item>
-        <item>Do not change</item>
+        <item>Не змінювати</item>
     </string-array>
-    <string name="suppress_fullscreen_intent_title">Block fullscreen event</string>
-    <string name="suppress_fullscreen_intent_summary">Prevent fullscreen events like incoming calls from appearing while in-game</string>
-    <string name="per_app_title">Configure Game</string>
-    <string name="per_app_mode_title">Preferred Mode</string>
+    <string name="suppress_fullscreen_intent_title">Блокувати повноекранні сповіщення</string>
+    <string name="suppress_fullscreen_intent_summary">Запобігання відображенню подій на весь екран, таких як вхідні дзвінки, під час гри</string>
+    <string name="per_app_title">Налаштувати гру</string>
+    <string name="per_app_mode_title">Бажаний режим</string>
     <string-array name="per_app_preferred_mode_entries">
-        <item>Standard</item>
+        <item>Стандартний</item>
         <item>Продуктивність</item>
-        <item>Battery</item>
+        <item>Акумулятор</item>
     </string-array>
     <string name="per_app_angle_title">Graphics driver</string>
     <string name="per_app_unregister">Remove %1$s from library</string>
@@ -122,14 +122,14 @@
     <string name="registered_game">Зареєстрована гра</string>
     <string name="game_space">Ігровий простір</string>
     <!-- Ringer Mode Options -->
-    <string name="ringer_mode_silent">Silent</string>
-    <string name="ringer_mode_vibrate">Vibrate</string>
+    <string name="ringer_mode_silent">Режим тиші</string>
+    <string name="ringer_mode_vibrate">Вібросигнал</string>
     <string name="ringer_mode_normal">Звичайний</string>
-    <string name="ringer_mode_no_change">Do not change</string>
+    <string name="ringer_mode_no_change">Не змінювати</string>
     <!-- Game Mode Labels -->
-    <string name="game_mode_standard">Standard</string>
+    <string name="game_mode_standard">Стандартний</string>
     <string name="game_mode_performance">Продуктивність</string>
-    <string name="game_mode_battery">Battery</string>
+    <string name="game_mode_battery">Акумулятор</string>
     <!-- Game Panel -->
     <string name="save">Зберегти</string>
     <string name="panel_options">Параметри панелі</string>
@@ -153,10 +153,10 @@
     <string name="about_donate">Donate</string>
     <!-- Tile Labels -->
     <string name="tile_danmaku">Danmaku</string>
-    <string name="tile_stay_awake">Stay Awake</string>
+    <string name="tile_stay_awake">Не засинати</string>
     <string name="tile_wifi">Wi-Fi</string>
     <string name="tile_dnd">Не турбувати</string>
-    <string name="tile_fps_info">FPS Info</string>
+    <string name="tile_fps_info">Інформація про FPS</string>
     <string name="tile_auto_rotate">Автоповорот</string>
     <string name="tile_boost_memory">Прискорити пам\'ять</string>
     <string name="tile_settings">Налаштування</string>
