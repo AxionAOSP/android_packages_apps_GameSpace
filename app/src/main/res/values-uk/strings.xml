@@ -64,47 +64,47 @@
         <item>Продуктивність</item>
         <item>Акумулятор</item>
     </string-array>
-    <string name="per_app_angle_title">Graphics driver</string>
-    <string name="per_app_unregister">Remove %1$s from library</string>
-    <string name="adb_disabled_summary">Temporary disable USB ADB debugging while in-game</string>
-    <string name="adb_disabled_title">Disable USB debugging</string>
-    <string name="ram_usage">RAM usage: </string>
+    <string name="per_app_angle_title">Графічний драйвер</string>
+    <string name="per_app_unregister">Видалити %1$s з бібліотеки</string>
+    <string name="adb_disabled_summary">Тимчасове вимкнення налагодження USB ADB під час гри</string>
+    <string name="adb_disabled_title">Вимкнути налагодження USB</string>
+    <string name="ram_usage">Використання оперативної пам\'яті: </string>
     <!-- Notification Mode -->
-    <string name="notification_mode_title">Notification mode</string>
-    <string name="notification_mode_hide">Do not show</string>
-    <string name="notification_mode_headsup">Show as heads up</string>
-    <string name="notification_mode_reticker">Show as reTicker</string>
-    <string name="notification_mode_danmaku">Show as Danmaku</string>
+    <string name="notification_mode_title">Режим сповіщень</string>
+    <string name="notification_mode_hide">Не показувати</string>
+    <string name="notification_mode_headsup">Відображати як спливаючі сповіщення</string>
+    <string name="notification_mode_reticker">Показати як в новому стилі спливаючих сповіщень</string>
+    <string name="notification_mode_danmaku">Показати як Данмаку</string>
     <string name="notification_hide">Сховати</string>
-    <string name="notification_headsup">Heads Up</string>
-    <string name="notification_reticker">reTicker</string>
-    <string name="notification_danmaku">Danmaku</string>
+    <string name="notification_headsup">Спливаючі сповіщення</string>
+    <string name="notification_reticker">Новий стиль спливаючих сповіщень</string>
+    <string name="notification_danmaku">Данмаку</string>
     <!-- Ringer Mode -->
-    <string name="in_game_calls_title">In-game call</string>
-    <string name="in_game_calls_no_action">No action</string>
-    <string name="in_game_calls_auto_answer">Auto answer</string>
-    <string name="in_game_calls_auto_reject">Auto reject</string>
-    <string name="in_game_calls_received_number">Received call from %1$s</string>
-    <string name="in_game_calls_rejected_number">Rejected call from %1$s</string>
+    <string name="in_game_calls_title">Дзвінок у грі</string>
+    <string name="in_game_calls_no_action">Немає дій</string>
+    <string name="in_game_calls_auto_answer">Автоматична відповідь</string>
+    <string name="in_game_calls_auto_reject">Відхилити автоматично</string>
+    <string name="in_game_calls_received_number">Отримано дзвінок від %1$s</string>
+    <string name="in_game_calls_rejected_number">Відхилено виклик від %1$s</string>
     <!-- Danmaku Notification Mode -->
-    <string name="danmaku_notification_mode_title">Danmaku Notification mode</string>
-    <string name="danmaku_notification_mode_summary">Show notification as danmaku aka bullet comments while game is active</string>
+    <string name="danmaku_notification_mode_title">Режим сповіщень Данмаку</string>
+    <string name="danmaku_notification_mode_summary">Показувати сповіщення як Danmaku aka bullet коментарями під час гри активними</string>
     <!-- Custom seekbar -->
-    <string name="custom_seekbar_value">Value: <xliff:g id="v">%s</xliff:g></string>
-    <string name="custom_seekbar_default_value">by default</string>
-    <string name="custom_seekbar_default_value_to_set">Default value: <xliff:g id="v">%s</xliff:g>\nLong tap to set</string>
-    <string name="custom_seekbar_default_value_is_set">Default value is set</string>
-    <string name="gamespace_menu_opacity_title">Overlay menu opacity level</string>
+    <string name="custom_seekbar_value">Значення: <xliff:g id="v">%s</xliff:g></string>
+    <string name="custom_seekbar_default_value">за замовчуванням</string>
+    <string name="custom_seekbar_default_value_to_set">Значення за замовчуванням: <xliff:g id="v">%s</xliff:g>\nДовго тримайте, щоб встановити</string>
+    <string name="custom_seekbar_default_value_is_set">Значення за замовчуванням встановлено</string>
+    <string name="gamespace_menu_opacity_title">Рівень непрозорості меню накладання</string>
     <!-- Bypass charging -->
-    <string name="bypass_charge_enabled_summary">Bypass charging</string>
-    <string name="bypass_charge_enabled_title">Enable bypass charging while playing games</string>
-    <string name="gamespace_running">Game Space is running</string>
-    <string name="app_locked_message">This app is locked. Please unlock it first.</string>
-    <string name="call_overlay_enabled_title">Call overlay</string>
-    <string name="call_overlay_enabled_summary">Show minimal call overlay to answer/reject calls</string>
+    <string name="bypass_charge_enabled_summary">Пряме живлення телефону</string>
+    <string name="bypass_charge_enabled_title">Увімкнути обхід зарядки під час гри</string>
+    <string name="gamespace_running">Ігровий простір запущений</string>
+    <string name="app_locked_message">Цю програму заблоковано. Будь ласка, розблокуйте її спочатку.</string>
+    <string name="call_overlay_enabled_title">Накладання викликів</string>
+    <string name="call_overlay_enabled_summary">Показувати мінімальне накладання викликів для відповіді/відхилення викликів</string>
     <!-- UI Strings -->
     <string name="select_apps_to_launch">Виберіть додатки для швидкого запуску</string>
-    <string name="add_game">Add game</string>
+    <string name="add_game">Додати гру</string>
     <string name="expanded">Розгорнуто</string>
     <string name="collapsed">Згорнуто</string>
     <string name="toggle_menu">Перемкнути меню</string>
@@ -137,22 +137,22 @@
     <string name="fps_graph">Графік FPS</string>
     <string name="selected_tiles">Вибрані плитки</string>
     <string name="available_tiles">Доступні плитки</string>
-    <string name="drag_tiles_here">Drag tiles here</string>
-    <string name="all_tiles_added">All tiles added</string>
+    <string name="drag_tiles_here">Перетягніть плитки сюди</string>
+    <string name="all_tiles_added">Усі плитки додано</string>
     <string name="fps_stats">Min %1$d | Avg %2$d | Max %3$d</string>
     <string name="add">Додати</string>
-    <string name="view_details">View Details</string>
-    <string name="launch_game">Launch Game</string>
-    <string name="remove_game">Remove Game</string>
-    <string name="empty_library">No games in your library</string>
-    <string name="add_first_game">Add Your First Game</string>
-    <string name="per_app_settings">Game Settings</string>
-    <string name="search_apps">Search apps\u2026</string>
+    <string name="view_details">Переглянути подробиці</string>
+    <string name="launch_game">Запуск гри</string>
+    <string name="remove_game">Видалити гру</string>
+    <string name="empty_library">У вашій бібліотеці немає ігор</string>
+    <string name="add_first_game">Додати вашу першу гру</string>
+    <string name="per_app_settings">Налаштування гри</string>
+    <string name="search_apps">Пошук додатків\u2026</string>
     <string name="about_github">GitHub</string>
-    <string name="about_translate">Translate</string>
-    <string name="about_donate">Donate</string>
+    <string name="about_translate">Перекласти</string>
+    <string name="about_donate">Підтримати</string>
     <!-- Tile Labels -->
-    <string name="tile_danmaku">Danmaku</string>
+    <string name="tile_danmaku">Данмаку</string>
     <string name="tile_stay_awake">Не засинати</string>
     <string name="tile_wifi">Wi-Fi</string>
     <string name="tile_dnd">Не турбувати</string>
@@ -165,44 +165,44 @@
     <string name="tile_mobile_data">Мобільні дані</string>
     <string name="tile_touch_boost">Прискорення дотиків</string>
     <string name="tile_flashlight">Ліхтарик</string>
-    <string name="tile_dark_mode">Dark Mode</string>
-    <string name="tile_location">Location</string>
-    <string name="tile_battery_saver">Battery Saver</string>
+    <string name="tile_dark_mode">Темний режим</string>
+    <string name="tile_location">Місцезнаходження</string>
+    <string name="tile_battery_saver">Режим економії заряду акумулятора</string>
     <string name="tile_hotspot">Точка доступу</string>
     <string name="tile_nfc">NFC</string>
-    <string name="tile_night_light">Night Light</string>
+    <string name="tile_night_light">Нічник</string>
     <string name="tile_aod">Завжди увімкнений дисплей</string>
-    <string name="tile_data_saver">Data Saver</string>
-    <string name="tile_color_inversion">Color Inversion</string>
-    <string name="tile_color_correction">Color Correction</string>
-    <string name="tile_reduce_brightness">Reduce Brightness</string>
-    <string name="tile_one_handed">One Handed</string>
-    <string name="tile_heads_up">Heads Up</string>
-    <string name="tile_auto_sync">Auto Sync</string>
+    <string name="tile_data_saver">Економія даних</string>
+    <string name="tile_color_inversion">Інверсія кольорів</string>
+    <string name="tile_color_correction">Корекція кольору</string>
+    <string name="tile_reduce_brightness">Зменшити яскравість</string>
+    <string name="tile_one_handed">Однією рукою</string>
+    <string name="tile_heads_up">Спливаючі сповіщення</string>
+    <string name="tile_auto_sync">Автоматична синхронізація</string>
     <string name="tile_camera_privacy">Камера</string>
-    <string name="tile_mic_privacy">Microphone</string>
-    <string name="tile_work_profile">Work Profile</string>
-    <string name="tile_usb_tether">USB Tethering</string>
-    <string name="tile_dream">Screen Saver</string>
-    <string name="tile_reading_mode">Reading Mode</string>
-    <string name="tile_power_share">Power Share</string>
-    <string name="tile_caffeine">Caffeine</string>
-    <string name="tile_vpn">VPN</string>
-    <string name="tile_cast">Cast</string>
-    <string name="tile_profiles">Profiles</string>
-    <string name="tile_smart_pixels">Smart Pixels</string>
-    <string name="tile_screen_record">Screen Record</string>
+    <string name="tile_mic_privacy">Мікрофон</string>
+    <string name="tile_work_profile">Робочий профіль</string>
+    <string name="tile_usb_tether">USB-модем</string>
+    <string name="tile_dream">Заставка</string>
+    <string name="tile_reading_mode">Режим читання</string>
+    <string name="tile_power_share">Розповсюдження Сили</string>
+    <string name="tile_caffeine">Режим \"Заборона сну\"</string>
+    <string name="tile_vpn">Мережа VPN</string>
+    <string name="tile_cast">Транслювати</string>
+    <string name="tile_profiles">Профілі</string>
+    <string name="tile_smart_pixels">Смарт Пікселі</string>
+    <string name="tile_screen_record">Запис екрану</string>
     <string name="tile_screenshot">Скріншот</string>
     <!-- Icon Idle Transparency -->
-    <string name="icon_idle_alpha_title">Icon idle transparency</string>
+    <string name="icon_idle_alpha_title">Прозорість значка в режимі очікування</string>
     <!-- Auto DND -->
-    <string name="auto_dnd_title">Auto Do Not Disturb</string>
-    <string name="auto_dnd_summary">Automatically enable DND while in-game and restore when done</string>
+    <string name="auto_dnd_title">Автоматичний режим «Не турбувати»</string>
+    <string name="auto_dnd_summary">Автоматично вмикати режим «Не турбувати» під час гри та відновлювати його після завершення</string>
     <!-- Controller Mapper -->
-    <string name="mapper_press_button">Press a button on your controller or keyboard\u2026</string>
-    <string name="mapper_add_point">Add tap point</string>
-    <string name="mapper_delete_point">Delete tap point</string>
-    <string name="mapper_map_controls">Map controls</string>
+    <string name="mapper_press_button">Натисніть кнопку на контролері або клавіатурі\u2026</string>
+    <string name="mapper_add_point">Додати точку дотику</string>
+    <string name="mapper_delete_point">Видалити точку дотику</string>
+    <string name="mapper_map_controls">Елементи керування картою</string>
     <!-- Content Descriptions (Accessibility) -->
     <string name="cd_reject">Відхилити</string>
     <string name="cd_accept">Прийняти</string>
