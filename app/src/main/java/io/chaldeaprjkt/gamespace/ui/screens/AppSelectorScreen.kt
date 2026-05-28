@@ -39,8 +39,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -58,6 +56,7 @@ import io.chaldeaprjkt.gamespace.R
 import io.chaldeaprjkt.gamespace.ui.viewmodel.AppSelectorViewModel
 import io.chaldeaprjkt.gamespace.utils.rememberDrawablePainter
 import kotlinx.coroutines.FlowPreview
+import com.android.axion.compose.scaffold.AxionPinnedTopAppBar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 
@@ -82,8 +81,9 @@ fun AppSelectorScreen(
     Scaffold(
         topBar = {
             Column {
-                TopAppBar(
-                    title = { Text(stringResource(R.string.app_selector_label)) },
+                AxionPinnedTopAppBar(
+                    title = stringResource(R.string.app_selector_label),
+                    containerColor = Color.Transparent,
                     navigationIcon = {
                         IconButton(onClick = onBack) {
                             Icon(
@@ -92,9 +92,6 @@ fun AppSelectorScreen(
                             )
                         }
                     },
-                    colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = Color.Transparent,
-                    ),
                 )
                 TextField(
                     value = searchQuery,

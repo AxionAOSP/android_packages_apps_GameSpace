@@ -38,6 +38,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.drawable.toBitmap
+import com.android.axion.compose.scaffold.AxionPinnedTopAppBar
 import io.chaldeaprjkt.gamespace.R
 import io.chaldeaprjkt.gamespace.ui.components.*
 import io.chaldeaprjkt.gamespace.ui.viewmodel.PerAppSettingsViewModel
@@ -81,13 +82,10 @@ fun PerAppSettingsScreen(
     Scaffold(
         modifier = modifier,
         topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(R.string.per_app_title),
-                        style = MaterialTheme.typography.headlineMedium
-                    )
-                },
+            AxionPinnedTopAppBar(
+                title = stringResource(R.string.per_app_title),
+                containerColor = Color.Transparent,
+                scrolledContainerColor = Color.Transparent,
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(
@@ -96,10 +94,6 @@ fun PerAppSettingsScreen(
                         )
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.Transparent,
-                    scrolledContainerColor = Color.Transparent
-                )
             )
         },
         containerColor = MaterialTheme.colorScheme.surfaceContainer
