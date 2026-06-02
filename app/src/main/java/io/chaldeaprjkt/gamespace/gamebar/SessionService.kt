@@ -103,7 +103,6 @@ class SessionService : Hilt_SessionService() {
             gameModeUtils = gameModeUtils,
             settings = settings,
             tileRepository = tileRepository,
-            platform = platform,
             mapperController = mapperController,
         )
         sidebar.onCreate()

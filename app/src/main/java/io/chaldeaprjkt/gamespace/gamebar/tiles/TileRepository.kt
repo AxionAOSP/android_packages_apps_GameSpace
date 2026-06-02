@@ -18,10 +18,13 @@ package io.chaldeaprjkt.gamespace.gamebar.tiles
 import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.SystemProperties
 import android.provider.Settings
 import android.widget.Toast
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
@@ -29,10 +32,13 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.snapshots.SnapshotStateList
+import com.android.axion.platform.AxFeatureState
 import com.android.axion.platform.AxPlatformClient
+import com.android.axion.platform.AxPlatformFeature
 import io.chaldeaprjkt.gamespace.R
 import io.chaldeaprjkt.gamespace.data.AppSettings
 import io.chaldeaprjkt.gamespace.data.SystemSettings
+import java.util.concurrent.Executor
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -74,7 +80,6 @@ class FixedActionTile(
 class PlatformTile(
     override val id: String,
     override val icon: Int,
-    private val feature: String,
     private val platform: AxPlatformClient,
 ) : TileAction {
     val activeState = mutableStateOf(false)
@@ -85,15 +90,20 @@ class PlatformTile(
     @Composable override fun observeEnabled(): State<Boolean> = rememberUpdatedState(activeState.value)
 
     override fun toggle() {
-        platform.toggle(feature)
+        platform.toggle(id)
     }
 
-    fun updateFromState(state: Bundle) {
-        activeState.value = state.getBoolean("active", false)
-        val newLabel = AxPlatformClient.getLabel(state)
-        if (!newLabel.isNullOrBlank()) labelState.value = newLabel
+    fun updateFromState(state: AxFeatureState) {
+        activeState.value = state.isActive
+        state.label?.takeIf { it.isNotBlank() }?.let { labelState.value = it }
     }
 }
+
+private data class PlatformTileSpec(
+    val feature: String,
+    @DrawableRes val iconRes: Int,
+    @StringRes val labelRes: Int,
+)
 
 @Singleton
 class TileRepository @Inject constructor(
@@ -102,19 +112,17 @@ class TileRepository @Inject constructor(
     private val systemSettings: SystemSettings,
 ) {
     private lateinit var platform: AxPlatformClient
-
     private lateinit var defaultTiles: List<TileAction>
-    private val platformTiles = mutableListOf<PlatformTile>()
 
-    private val platformListener = object : AxPlatformClient.Listener() {
-        override fun onFeatureChanged(feature: String, active: Boolean) {
-            platformTiles.find { it.id == feature }?.activeState?.value = active
-        }
+    private val platformTiles = mutableMapOf<String, PlatformTile>()
+    private val mainHandler = Handler(Looper.getMainLooper())
+    private val platformExecutor = Executor { command -> mainHandler.post(command) }
+    private var platformRegistered = false
 
-        override fun onStateChanged(key: String, state: Bundle) {
-            platformTiles.find { it.id == key }?.updateFromState(state)
+    private val platformCallback =
+        AxPlatformClient.StateCallback { key, state ->
+            platformTiles[key]?.updateFromState(state)
         }
-    }
 
     private val _tileOrder = mutableStateListOf<String>()
 
@@ -126,35 +134,30 @@ class TileRepository @Inject constructor(
 
     val isBrightnessVisible: MutableState<Boolean> = mutableStateOf(appSettings.brightnessEnabled)
     val isFpsGraphVisible: MutableState<Boolean> = mutableStateOf(appSettings.fpsGraphEnabled)
+
     fun init(platform: AxPlatformClient) {
         this.platform = platform
-
         defaultTiles = buildDefaultTiles()
-
-        platform.addListener(platformListener)
-
+        registerPlatformCallback()
         refreshPlatformStates()
-
         _tileOrder.clear()
         _tileOrder.addAll(loadTileOrder())
         _tiles.clear()
-        _tiles.addAll(
-            _tileOrder.mapNotNull { id ->
-                defaultTiles.find { it.id == id }
-            }
-        )
+        _tiles.addAll(_tileOrder.mapNotNull { id -> defaultTiles.find { it.id == id } })
     }
 
     fun refreshPlatformStates() {
         if (!::platform.isInitialized) return
-        platformTiles.forEach { tile ->
+        platformTiles.values.forEach { tile ->
             val state = platform.getState(tile.id)
             if (!state.isEmpty) tile.updateFromState(state)
         }
     }
 
     fun dispose() {
-        platform.removeListener(platformListener)
+        if (!platformRegistered) return
+        platform.unregisterCallback(platformCallback)
+        platformRegistered = false
     }
 
     fun setBrightnessEnabled(enabled: Boolean) {
@@ -165,6 +168,20 @@ class TileRepository @Inject constructor(
     fun setFpsGraphEnabled(enabled: Boolean) {
         isFpsGraphVisible.value = enabled
         appSettings.fpsGraphEnabled = enabled
+    }
+
+    fun updateTileSelection(selectedIds: List<String>) {
+        _tiles.clear()
+        _tiles.addAll(selectedIds.mapNotNull { id -> defaultTiles.find { it.id == id } })
+        _tileOrder.clear()
+        _tileOrder.addAll(selectedIds)
+        saveTileOrder()
+    }
+
+    private fun registerPlatformCallback() {
+        if (platformRegistered) return
+        platform.registerCallback(platformExecutor, platformCallback)
+        platformRegistered = true
     }
 
     private fun saveTileOrder() {
@@ -180,206 +197,20 @@ class TileRepository @Inject constructor(
         }
     }
 
-    fun updateTileSelection(selectedIds: List<String>) {
-        _tiles.clear()
-        _tiles.addAll(selectedIds.mapNotNull { id ->
-            defaultTiles.find { it.id == id }
-        })
-        _tileOrder.clear()
-        _tileOrder.addAll(selectedIds)
-        saveTileOrder()
-    }
-
-    private fun platformTile(feature: String, iconRes: Int, fallbackLabel: String): PlatformTile {
+    private fun platformTile(spec: PlatformTileSpec): PlatformTile {
         val tile = PlatformTile(
-            id = feature,
-            icon = iconRes,
-            feature = feature,
+            id = spec.feature,
+            icon = spec.iconRes,
             platform = platform,
         )
-        tile.labelState.value = fallbackLabel
-        platformTiles.add(tile)
+        tile.labelState.value = context.getString(spec.labelRes)
+        platformTiles[spec.feature] = tile
         return tile
     }
 
     private fun buildDefaultTiles(): List<TileAction> = buildList {
         platformTiles.clear()
-
-        add(platformTile(
-            AxPlatformClient.FEATURE_WIFI,
-            R.drawable.materialsymbols_ic_wifi_rounded_filled,
-            context.getString(R.string.tile_wifi),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_BLUETOOTH,
-            R.drawable.materialsymbols_ic_bluetooth_rounded_filled,
-            context.getString(R.string.tile_bluetooth),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_ZEN,
-            R.drawable.materialsymbols_ic_do_not_disturb_on_rounded_filled,
-            context.getString(R.string.tile_dnd),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_ROTATION,
-            R.drawable.materialsymbols_ic_screen_rotation_up_rounded_filled,
-            context.getString(R.string.tile_auto_rotate),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_MOBILE_DATA,
-            R.drawable.materialsymbols_ic_android_cell_4_bar_rounded_filled,
-            context.getString(R.string.tile_mobile_data),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_AIRPLANE_MODE,
-            R.drawable.materialsymbols_ic_flight_rounded_filled,
-            context.getString(R.string.tile_airplane_mode),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_FLASHLIGHT,
-            R.drawable.materialsymbols_ic_flashlight_on_rounded_filled,
-            context.getString(R.string.tile_flashlight),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_DARK_MODE,
-            R.drawable.materialsymbols_ic_dark_mode_rounded_filled,
-            context.getString(R.string.tile_dark_mode),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_LOCATION,
-            R.drawable.materialsymbols_ic_location_on_rounded_filled,
-            context.getString(R.string.tile_location),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_BATTERY_SAVER,
-            R.drawable.materialsymbols_ic_battery_saver_rounded_filled,
-            context.getString(R.string.tile_battery_saver),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_HOTSPOT,
-            R.drawable.materialsymbols_ic_wifi_tethering_rounded_filled,
-            context.getString(R.string.tile_hotspot),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_NFC,
-            R.drawable.materialsymbols_ic_nfc_rounded_filled,
-            context.getString(R.string.tile_nfc),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_NIGHT_LIGHT,
-            R.drawable.materialsymbols_ic_nights_stay_rounded_filled,
-            context.getString(R.string.tile_night_light),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_AOD,
-            R.drawable.materialsymbols_ic_aod_rounded_filled,
-            context.getString(R.string.tile_aod),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_DATA_SAVER,
-            R.drawable.materialsymbols_ic_data_saver_on_rounded_filled,
-            context.getString(R.string.tile_data_saver),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_COLOR_INVERSION,
-            R.drawable.materialsymbols_ic_invert_colors_rounded_filled,
-            context.getString(R.string.tile_color_inversion),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_COLOR_CORRECTION,
-            R.drawable.materialsymbols_ic_palette_rounded_filled,
-            context.getString(R.string.tile_color_correction),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_REDUCE_BRIGHTNESS,
-            R.drawable.materialsymbols_ic_brightness_low_rounded_filled,
-            context.getString(R.string.tile_reduce_brightness),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_ONE_HANDED_MODE,
-            R.drawable.materialsymbols_ic_phone_android_rounded_filled,
-            context.getString(R.string.tile_one_handed),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_HEADS_UP,
-            R.drawable.materialsymbols_ic_notifications_active_rounded_filled,
-            context.getString(R.string.tile_heads_up),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_AUTO_SYNC,
-            R.drawable.materialsymbols_ic_sync_rounded_filled,
-            context.getString(R.string.tile_auto_sync),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_CAMERA_PRIVACY,
-            R.drawable.materialsymbols_ic_photo_camera_rounded_filled,
-            context.getString(R.string.tile_camera_privacy),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_MIC_PRIVACY,
-            R.drawable.materialsymbols_ic_mic_rounded_filled,
-            context.getString(R.string.tile_mic_privacy),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_WORK_PROFILE,
-            R.drawable.materialsymbols_ic_work_rounded_filled,
-            context.getString(R.string.tile_work_profile),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_USB_TETHER,
-            R.drawable.materialsymbols_ic_usb_rounded_filled,
-            context.getString(R.string.tile_usb_tether),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_DREAM,
-            R.drawable.materialsymbols_ic_bedtime_rounded_filled,
-            context.getString(R.string.tile_dream),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_READING_MODE,
-            R.drawable.materialsymbols_ic_menu_book_rounded_filled,
-            context.getString(R.string.tile_reading_mode),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_POWER_SHARE,
-            R.drawable.materialsymbols_ic_battery_charging_full_rounded_filled,
-            context.getString(R.string.tile_power_share),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_CAFFEINE,
-            R.drawable.materialsymbols_ic_local_cafe_rounded_filled,
-            context.getString(R.string.tile_caffeine),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_VPN,
-            R.drawable.materialsymbols_ic_vpn_key_rounded_filled,
-            context.getString(R.string.tile_vpn),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_CAST,
-            R.drawable.materialsymbols_ic_cast_rounded_filled,
-            context.getString(R.string.tile_cast),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_PROFILES,
-            R.drawable.materialsymbols_ic_manage_accounts_rounded_filled,
-            context.getString(R.string.tile_profiles),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_SMART_PIXELS,
-            R.drawable.materialsymbols_ic_grid_on_rounded_filled,
-            context.getString(R.string.tile_smart_pixels),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_SCREEN_RECORD,
-            R.drawable.materialsymbols_ic_videocam_rounded_filled,
-            context.getString(R.string.tile_screen_record),
-        ))
-        add(platformTile(
-            AxPlatformClient.FEATURE_SCREENSHOT,
-            R.drawable.materialsymbols_ic_screenshot_rounded_filled,
-            context.getString(R.string.tile_screenshot),
-        ))
+        platformTileSpecs.mapTo(this) { platformTile(it) }
 
         add(
             ToggleableTile(
@@ -390,7 +221,7 @@ class TileRepository @Inject constructor(
                 setter = {
                     appSettings.danmakuNotification = it
                     systemSettings.headsup = !it
-                }
+                },
             )
         )
 
@@ -400,7 +231,7 @@ class TileRepository @Inject constructor(
                 label = context.getString(R.string.tile_stay_awake),
                 icon = R.drawable.materialsymbols_ic_bedtime_rounded_filled,
                 state = mutableStateOf(systemSettings.stayAwake),
-                setter = { systemSettings.stayAwake = it }
+                setter = { systemSettings.stayAwake = it },
             )
         )
 
@@ -410,7 +241,7 @@ class TileRepository @Inject constructor(
                 label = context.getString(R.string.tile_fps_info),
                 icon = R.drawable.materialsymbols_ic_bar_chart_rounded_filled,
                 state = mutableStateOf(appSettings.showFps),
-                setter = { appSettings.showFps = it }
+                setter = { appSettings.showFps = it },
             )
         )
 
@@ -423,8 +254,12 @@ class TileRepository @Inject constructor(
                     try {
                         ActivityManager.getService().releaseMemory(606, 60, false, false)
                     } catch (_: Exception) {}
-                    Toast.makeText(context, context.getString(R.string.boost_memory), Toast.LENGTH_SHORT).show()
-                }
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.boost_memory),
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                },
             )
         )
 
@@ -438,7 +273,7 @@ class TileRepository @Inject constructor(
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     }
                     context.startActivity(intent)
-                }
+                },
             )
         )
 
@@ -456,9 +291,189 @@ class TileRepository @Inject constructor(
                         val newVal = if (it) 1 else 0
                         SystemProperties.set("persist.sys.touchboost_enable", "$newVal")
                         touchBoostState.value = it
-                    }
+                    },
                 )
             )
         }
+    }
+
+    companion object {
+        private val platformTileSpecs = listOf(
+            PlatformTileSpec(
+                AxPlatformFeature.WIFI,
+                R.drawable.materialsymbols_ic_wifi_rounded_filled,
+                R.string.tile_wifi,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.BLUETOOTH,
+                R.drawable.materialsymbols_ic_bluetooth_rounded_filled,
+                R.string.tile_bluetooth,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.ZEN,
+                R.drawable.materialsymbols_ic_do_not_disturb_on_rounded_filled,
+                R.string.tile_dnd,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.ROTATION,
+                R.drawable.materialsymbols_ic_screen_rotation_up_rounded_filled,
+                R.string.tile_auto_rotate,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.MOBILE_DATA,
+                R.drawable.materialsymbols_ic_android_cell_4_bar_rounded_filled,
+                R.string.tile_mobile_data,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.AIRPLANE_MODE,
+                R.drawable.materialsymbols_ic_flight_rounded_filled,
+                R.string.tile_airplane_mode,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.FLASHLIGHT,
+                R.drawable.materialsymbols_ic_flashlight_on_rounded_filled,
+                R.string.tile_flashlight,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.DARK_MODE,
+                R.drawable.materialsymbols_ic_dark_mode_rounded_filled,
+                R.string.tile_dark_mode,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.LOCATION,
+                R.drawable.materialsymbols_ic_location_on_rounded_filled,
+                R.string.tile_location,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.BATTERY_SAVER,
+                R.drawable.materialsymbols_ic_battery_saver_rounded_filled,
+                R.string.tile_battery_saver,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.HOTSPOT,
+                R.drawable.materialsymbols_ic_wifi_tethering_rounded_filled,
+                R.string.tile_hotspot,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.NFC,
+                R.drawable.materialsymbols_ic_nfc_rounded_filled,
+                R.string.tile_nfc,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.NIGHT_LIGHT,
+                R.drawable.materialsymbols_ic_nights_stay_rounded_filled,
+                R.string.tile_night_light,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.AOD,
+                R.drawable.materialsymbols_ic_aod_rounded_filled,
+                R.string.tile_aod,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.DATA_SAVER,
+                R.drawable.materialsymbols_ic_data_saver_on_rounded_filled,
+                R.string.tile_data_saver,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.COLOR_INVERSION,
+                R.drawable.materialsymbols_ic_invert_colors_rounded_filled,
+                R.string.tile_color_inversion,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.COLOR_CORRECTION,
+                R.drawable.materialsymbols_ic_palette_rounded_filled,
+                R.string.tile_color_correction,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.REDUCE_BRIGHTNESS,
+                R.drawable.materialsymbols_ic_brightness_low_rounded_filled,
+                R.string.tile_reduce_brightness,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.ONE_HANDED_MODE,
+                R.drawable.materialsymbols_ic_phone_android_rounded_filled,
+                R.string.tile_one_handed,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.HEADS_UP,
+                R.drawable.materialsymbols_ic_notifications_active_rounded_filled,
+                R.string.tile_heads_up,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.AUTO_SYNC,
+                R.drawable.materialsymbols_ic_sync_rounded_filled,
+                R.string.tile_auto_sync,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.CAMERA_PRIVACY,
+                R.drawable.materialsymbols_ic_photo_camera_rounded_filled,
+                R.string.tile_camera_privacy,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.MIC_PRIVACY,
+                R.drawable.materialsymbols_ic_mic_rounded_filled,
+                R.string.tile_mic_privacy,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.WORK_PROFILE,
+                R.drawable.materialsymbols_ic_work_rounded_filled,
+                R.string.tile_work_profile,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.USB_TETHER,
+                R.drawable.materialsymbols_ic_usb_rounded_filled,
+                R.string.tile_usb_tether,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.DREAM,
+                R.drawable.materialsymbols_ic_bedtime_rounded_filled,
+                R.string.tile_dream,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.READING_MODE,
+                R.drawable.materialsymbols_ic_menu_book_rounded_filled,
+                R.string.tile_reading_mode,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.POWER_SHARE,
+                R.drawable.materialsymbols_ic_battery_charging_full_rounded_filled,
+                R.string.tile_power_share,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.CAFFEINE,
+                R.drawable.materialsymbols_ic_local_cafe_rounded_filled,
+                R.string.tile_caffeine,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.VPN,
+                R.drawable.materialsymbols_ic_vpn_key_rounded_filled,
+                R.string.tile_vpn,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.CAST,
+                R.drawable.materialsymbols_ic_cast_rounded_filled,
+                R.string.tile_cast,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.PROFILES,
+                R.drawable.materialsymbols_ic_manage_accounts_rounded_filled,
+                R.string.tile_profiles,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.SMART_PIXELS,
+                R.drawable.materialsymbols_ic_grid_on_rounded_filled,
+                R.string.tile_smart_pixels,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.SCREEN_RECORD,
+                R.drawable.materialsymbols_ic_videocam_rounded_filled,
+                R.string.tile_screen_record,
+            ),
+            PlatformTileSpec(
+                AxPlatformFeature.SCREENSHOT,
+                R.drawable.materialsymbols_ic_screenshot_rounded_filled,
+                R.string.tile_screenshot,
+            ),
+        )
     }
 }

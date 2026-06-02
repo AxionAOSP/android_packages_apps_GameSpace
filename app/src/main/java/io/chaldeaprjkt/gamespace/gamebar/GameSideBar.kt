@@ -24,7 +24,6 @@ import android.content.*
 import android.content.res.Configuration
 import android.graphics.PixelFormat
 import android.graphics.Rect
-import android.os.Bundle
 import android.os.Handler
 import android.os.Process
 import android.os.UserHandle
@@ -53,7 +52,6 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.*
 import com.android.axion.compose.lifecycle.repeatWhenAttached
-import com.android.axion.platform.AxPlatformClient
 import io.chaldeaprjkt.gamespace.BuildFlags
 import io.chaldeaprjkt.gamespace.R
 import io.chaldeaprjkt.gamespace.data.AppSettings
@@ -78,7 +76,6 @@ class GameSidebar(
     private val gameModeUtils: GameModeUtils,
     private val settings: SystemSettings,
     private val tileRepository: TileRepository,
-    private val platform: AxPlatformClient,
     private val mapperController: MapperController,
 ) {
     private val gameBarLayoutParam = createGameBarLayoutParam()
@@ -127,10 +124,6 @@ class GameSidebar(
                 handler.post { fpsTextState.value = formatted }
             }
         }
-    }
-
-    private val recordingListener = object : AxPlatformClient.Listener() {
-        override fun onStateChanged(key: String, state: Bundle) {}
     }
 
     fun onCreate() {
@@ -224,7 +217,6 @@ class GameSidebar(
         if (BuildFlags.MAPPER_ENABLED) {
             mapperController.onGameStart(packageName)
         }
-        platform.addListener(recordingListener)
         handler.post {
             if (!::gameBarView.isInitialized) return@post
             runCatching {
@@ -239,7 +231,6 @@ class GameSidebar(
 
     fun onGameLeave() {
         mapperController.onGameLeave()
-        platform.removeListener(recordingListener)
         stopFpsTracking()
         shouldClose = true
         isLockedState.value = false
