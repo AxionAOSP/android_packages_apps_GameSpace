@@ -64,7 +64,7 @@
         <item>Performa</item>
         <item>Baterai</item>
     </string-array>
-    <string name="per_app_angle_title">Graphics driver</string>
+    <string name="per_app_angle_title">Driver Grafis</string>
     <string name="per_app_unregister">Hapus %1$s dari pustaka</string>
     <string name="adb_disabled_summary">Nonaktifkan sementara proses debug USB ADB saat di dalam game</string>
     <string name="adb_disabled_title">Nonaktifkan proses debug USB</string>
@@ -137,13 +137,13 @@
     <string name="fps_graph">Grafik FPS</string>
     <string name="selected_tiles">Ubin Terpilih</string>
     <string name="available_tiles">Ubin Tersedia</string>
-    <string name="drag_tiles_here">Drag tiles here</string>
-    <string name="all_tiles_added">All tiles added</string>
+    <string name="drag_tiles_here">Seret ubin di sini</string>
+    <string name="all_tiles_added">Semua ubin telah ditambahkan</string>
     <string name="fps_stats">min %1$d | avg %2$d | max %3$d</string>
     <string name="add">Tambah</string>
-    <string name="view_details">View Details</string>
-    <string name="launch_game">Launch Game</string>
-    <string name="remove_game">Remove Game</string>
+    <string name="view_details">Lihat Rincian</string>
+    <string name="launch_game">Luncurkan game</string>
+    <string name="remove_game">Hapus Game</string>
     <string name="empty_library">No games in your library</string>
     <string name="add_first_game">Add Your First Game</string>
     <string name="per_app_settings">Game Settings</string>
