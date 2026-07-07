@@ -26,9 +26,9 @@
     <string name="auto_brightness_disabled_title">Disable auto-brightness</string>
     <string name="auto_brightness_disabled_summary">Keep brightness settled while in-game</string>
     <string name="heads_up_disabled_summary">Disable Notification heads-up while in-game</string>
-    <string name="in_game_preferences_title">In-game options</string>
-    <string name="game_list_title">Library</string>
-    <string name="game_remove_message">Are you sure you want to remove %1$s from your library ?</string>
+    <string name="in_game_preferences_title">אפשרויות בתוך המשחק</string>
+    <string name="game_list_title">ספרייה</string>
+    <string name="game_remove_message">להסיר את %1$s מהספרייה?</string>
     <string name="app_search_title">חיפוש</string>
     <string name="three_screenshot_disabled_summary">Temporary disable three-fingers-swipe gesture while in-game</string>
     <string name="three_screenshot_disabled_title">Disable three fingers swipe gesture</string>
@@ -42,7 +42,7 @@
         <item>Unsupported</item>
         <item>Standard</item>
         <item>ביצועים</item>
-        <item>Battery</item>
+        <item>סוללה</item>
     </string-array>
     <string name="fps_Info_title">FPS Info</string>
     <string name="stay_awake_title">Stay Awake</string>
@@ -51,18 +51,18 @@
     <string name="ringer_mode_title">In-game ringer mode</string>
     <string-array name="ringer_mode_entries">
         <item>Silent</item>
-        <item>Vibrate</item>
-        <item>Normal</item>
-        <item>Do not change</item>
+        <item>רטט</item>
+        <item>רגילה</item>
+        <item>השארה ללא שינוי</item>
     </string-array>
     <string name="suppress_fullscreen_intent_title">Block fullscreen event</string>
     <string name="suppress_fullscreen_intent_summary">Prevent fullscreen events like incoming calls from appearing while in-game</string>
     <string name="per_app_title">Configure Game</string>
-    <string name="per_app_mode_title">Preferred Mode</string>
+    <string name="per_app_mode_title">מצב מועדף</string>
     <string-array name="per_app_preferred_mode_entries">
         <item>Standard</item>
         <item>ביצועים</item>
-        <item>Battery</item>
+        <item>סוללה</item>
     </string-array>
     <string name="per_app_angle_title">Graphics driver</string>
     <string name="per_app_unregister">Remove %1$s from library</string>
@@ -70,8 +70,8 @@
     <string name="adb_disabled_title">Disable USB debugging</string>
     <string name="ram_usage">RAM usage: </string>
     <!-- Notification Mode -->
-    <string name="notification_mode_title">Notification mode</string>
-    <string name="notification_mode_hide">Do not show</string>
+    <string name="notification_mode_title">מצב התראות</string>
+    <string name="notification_mode_hide">לא להציג</string>
     <string name="notification_mode_headsup">Show as heads up</string>
     <string name="notification_mode_reticker">Show as reTicker</string>
     <string name="notification_mode_danmaku">Show as Danmaku</string>
@@ -81,17 +81,17 @@
     <string name="notification_danmaku">Danmaku</string>
     <!-- Ringer Mode -->
     <string name="in_game_calls_title">In-game call</string>
-    <string name="in_game_calls_no_action">No action</string>
-    <string name="in_game_calls_auto_answer">Auto answer</string>
-    <string name="in_game_calls_auto_reject">Auto reject</string>
+    <string name="in_game_calls_no_action">ללא פעולה</string>
+    <string name="in_game_calls_auto_answer">מענה אוטומטי לשיחה</string>
+    <string name="in_game_calls_auto_reject">ניתוק אוטומטי של השיחה</string>
     <string name="in_game_calls_received_number">Received call from %1$s</string>
     <string name="in_game_calls_rejected_number">Rejected call from %1$s</string>
     <!-- Danmaku Notification Mode -->
     <string name="danmaku_notification_mode_title">Danmaku Notification mode</string>
     <string name="danmaku_notification_mode_summary">Show notification as danmaku aka bullet comments while game is active</string>
     <!-- Custom seekbar -->
-    <string name="custom_seekbar_value">Value: <xliff:g id="v">%s</xliff:g></string>
-    <string name="custom_seekbar_default_value">by default</string>
+    <string name="custom_seekbar_value">ערך: <xliff:g id="v">%s</xliff:g></string>
+    <string name="custom_seekbar_default_value">כברירת מחדל</string>
     <string name="custom_seekbar_default_value_to_set">Default value: <xliff:g id="v">%s</xliff:g>\nLong tap to set</string>
     <string name="custom_seekbar_default_value_is_set">Default value is set</string>
     <string name="gamespace_menu_opacity_title">Overlay menu opacity level</string>
@@ -123,13 +123,13 @@
     <string name="game_space">Game Space</string>
     <!-- Ringer Mode Options -->
     <string name="ringer_mode_silent">Silent</string>
-    <string name="ringer_mode_vibrate">Vibrate</string>
-    <string name="ringer_mode_normal">Normal</string>
-    <string name="ringer_mode_no_change">Do not change</string>
+    <string name="ringer_mode_vibrate">רטט</string>
+    <string name="ringer_mode_normal">רגילה</string>
+    <string name="ringer_mode_no_change">השארה ללא שינוי</string>
     <!-- Game Mode Labels -->
     <string name="game_mode_standard">Standard</string>
     <string name="game_mode_performance">ביצועים</string>
-    <string name="game_mode_battery">Battery</string>
+    <string name="game_mode_battery">סוללה</string>
     <!-- Game Panel -->
     <string name="save">שמירה</string>
     <string name="panel_options">Panel Options</string>
@@ -165,26 +165,26 @@
     <string name="tile_mobile_data">Mobile Data</string>
     <string name="tile_touch_boost">Touch Boost</string>
     <string name="tile_flashlight">פנס</string>
-    <string name="tile_dark_mode">Dark Mode</string>
-    <string name="tile_location">Location</string>
-    <string name="tile_battery_saver">Battery Saver</string>
+    <string name="tile_dark_mode">מצב כהה</string>
+    <string name="tile_location">מיקום</string>
+    <string name="tile_battery_saver">חיסכון בסוללה</string>
     <string name="tile_hotspot">Hotspot</string>
     <string name="tile_nfc">NFC</string>
-    <string name="tile_night_light">Night Light</string>
+    <string name="tile_night_light">תאורת לילה</string>
     <string name="tile_aod">Always On Display</string>
-    <string name="tile_data_saver">Data Saver</string>
-    <string name="tile_color_inversion">Color Inversion</string>
-    <string name="tile_color_correction">Color Correction</string>
-    <string name="tile_reduce_brightness">Reduce Brightness</string>
-    <string name="tile_one_handed">One Handed</string>
+    <string name="tile_data_saver">‏חוסך הנתונים</string>
+    <string name="tile_color_inversion">היפוך צבעים</string>
+    <string name="tile_color_correction">תיקון צבעים</string>
+    <string name="tile_reduce_brightness">הפחתת בהירות</string>
+    <string name="tile_one_handed">שימוש ביד אחת</string>
     <string name="tile_heads_up">Heads Up</string>
-    <string name="tile_auto_sync">Auto Sync</string>
+    <string name="tile_auto_sync">סנכרון אוטומטי</string>
     <string name="tile_camera_privacy">מצלמה</string>
-    <string name="tile_mic_privacy">Microphone</string>
-    <string name="tile_work_profile">Work Profile</string>
+    <string name="tile_mic_privacy">מיקרופון</string>
+    <string name="tile_work_profile">פרופיל עבודה</string>
     <string name="tile_usb_tether">USB Tethering</string>
-    <string name="tile_dream">Screen Saver</string>
-    <string name="tile_reading_mode">Reading Mode</string>
+    <string name="tile_dream">שומר מסך</string>
+    <string name="tile_reading_mode">מצב קריאה</string>
     <string name="tile_power_share">Power Share</string>
     <string name="tile_caffeine">Caffeine</string>
     <string name="tile_vpn">VPN</string>
@@ -207,7 +207,7 @@
     <string name="cd_reject">Reject</string>
     <string name="cd_accept">Accept</string>
     <string name="cd_caller_photo">Caller photo</string>
-    <string name="cd_dismiss">Dismiss</string>
+    <string name="cd_dismiss">התעלמות</string>
     <string name="cd_edit_tiles">Edit Tiles</string>
     <string name="cd_collapse">צמצום</string>
     <string name="cd_expand">הרחבה</string>
