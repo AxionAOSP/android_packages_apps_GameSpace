@@ -37,7 +37,7 @@
     <string name="state_disabled">מושבת</string>
     <string name="state_default">Default</string>
     <!-- Game Mode Name - sorted by GameManager's enum, do not modify the sequence! -->
-    <string name="game_mode_title">Mode</string>
+    <string name="game_mode_title">מצב</string>
     <string-array name="game_mode_names">
         <item>Unsupported</item>
         <item>Standard</item>
