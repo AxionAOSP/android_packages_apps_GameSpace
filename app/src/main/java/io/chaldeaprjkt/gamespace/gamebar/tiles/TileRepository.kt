@@ -55,7 +55,7 @@ class ToggleableTile(
     override val id: String,
     override var label: String,
     override val icon: Int,
-    private val state: MutableState<Boolean>,
+    val state: MutableState<Boolean>,
     private val setter: (Boolean) -> Unit,
 ) : TileAction {
     override val isEnabled: Boolean get() = state.value
@@ -232,6 +232,16 @@ class TileRepository @Inject constructor(
                 icon = R.drawable.materialsymbols_ic_bedtime_rounded_filled,
                 state = mutableStateOf(systemSettings.stayAwake),
                 setter = { systemSettings.stayAwake = it },
+            )
+        )
+
+        add(
+            ToggleableTile(
+                id = "crosshair",
+                label = context.getString(R.string.tile_crosshair),
+                icon = R.drawable.materialsymbols_ic_adjust_rounded_filled,
+                state = mutableStateOf(appSettings.crosshairEnabled),
+                setter = { appSettings.crosshairEnabled = it },
             )
         )
 

@@ -68,6 +68,7 @@ import androidx.compose.ui.unit.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.input.pointer.*
 import io.chaldeaprjkt.gamespace.R
+import io.chaldeaprjkt.gamespace.data.AppSettings
 import io.chaldeaprjkt.gamespace.data.SystemSettings
 import io.chaldeaprjkt.gamespace.gamebar.brightness.*
 import io.chaldeaprjkt.gamespace.gamebar.fps.*
@@ -87,6 +88,7 @@ private val RoundedTileShape = RoundedCornerShape(100f)
 
 @Composable
 fun GamePanelCard(
+    appSettings: AppSettings,
     interactor: BrightnessInteractor,
     fpsInteractor: FpsInteractor,
     apps: List<AppInfo>,
@@ -119,6 +121,7 @@ fun GamePanelCard(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer)
     ) {
         GamePanelContent(
+            appSettings = appSettings,
             apps = apps,
             headerExpanded = headerExpanded,
             onToggleExpand = { headerExpanded = !headerExpanded },
@@ -138,6 +141,7 @@ fun GamePanelCard(
 
 @Composable
 fun GamePanelContent(
+    appSettings: AppSettings,
     apps: List<AppInfo>,
     headerExpanded: Boolean,
     onToggleExpand: () -> Unit,
@@ -189,6 +193,19 @@ fun GamePanelContent(
                 onEditClick = { isEditing = true },
                 modifier = Modifier.fillMaxWidth()
             )
+
+            val crosshairTile = tileRepository.allAvailableTiles.find { it.id == "crosshair" }
+            val crosshairEnabled = crosshairTile?.observeEnabled()?.value ?: appSettings.crosshairEnabled
+
+            LaunchedEffect(crosshairEnabled) {
+                if (crosshairEnabled) {
+                    scrollState.animateScrollTo(scrollState.maxValue)
+                }
+            }
+
+            if (crosshairEnabled) {
+                CrosshairSettingsCard(appSettings = appSettings)
+            }
         } else {
             TileEditPanel(
                 tileRepository = tileRepository,
@@ -1344,4 +1361,294 @@ data class BatteryInfo(
     val level: Int = -1,
     val temperatureC: Float = 0f
 )
+
+@Composable
+fun CrosshairSettingsCard(
+    appSettings: AppSettings,
+    modifier: Modifier = Modifier
+) {
+    var crosshairStyle by remember { mutableStateOf(appSettings.crosshairStyle) }
+    var crosshairSize by remember { mutableStateOf(appSettings.crosshairSize) }
+    var crosshairColor by remember { mutableStateOf(appSettings.crosshairColor) }
+    var crosshairOpacity by remember { mutableStateOf(appSettings.crosshairOpacity) }
+    var crosshairOffsetX by remember { mutableStateOf(appSettings.crosshairOffsetX) }
+    var crosshairOffsetY by remember { mutableStateOf(appSettings.crosshairOffsetY) }
+    var isExpanded by remember { mutableStateOf(false) }
+
+    val presetColors = listOf(
+        0xFF00FF00.toInt() to Color(0xFF00FF00), // Green
+        0xFFFF0000.toInt() to Color(0xFFFF0000), // Red
+        0xFF00FFFF.toInt() to Color(0xFF00FFFF), // Cyan
+        0xFFFFFF00.toInt() to Color(0xFFFFFF00), // Yellow
+        0xFFFFFFFF.toInt() to Color(0xFFFFFFFF), // White
+        0xFF2196F3.toInt() to Color(0xFF2196F3)  // Blue
+    )
+
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(12.dp))
+            .padding(12.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { isExpanded = !isExpanded },
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Crosshair Settings",
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Icon(
+                painter = painterResource(R.drawable.ic_arrow_left),
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier
+                    .size(20.dp)
+                    .rotate(if (isExpanded) 90f else 270f)
+            )
+        }
+
+        AnimatedVisibility(
+            visible = isExpanded,
+            enter = fadeIn() + expandVertically(),
+            exit = fadeOut() + shrinkVertically()
+        ) {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = "Style",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                val styles = listOf(
+                    1 to R.drawable.crosshair_style_1,
+                    2 to R.drawable.crosshair_style_2,
+                    3 to R.drawable.crosshair_style_3,
+                    4 to R.drawable.crosshair_style_4,
+                    5 to R.drawable.crosshair_style_5,
+                    6 to R.drawable.crosshair_style_6,
+                    7 to R.drawable.crosshair_style_7,
+                    8 to R.drawable.crosshair_style_8
+                )
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    styles.chunked(4).forEach { rowStyles ->
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            rowStyles.forEach { (index, resId) ->
+                                val isSelected = crosshairStyle == index
+                                Box(
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .aspectRatio(1f)
+                                        .clip(RoundedCornerShape(8.dp))
+                                        .background(
+                                            if (isSelected) MaterialTheme.colorScheme.primaryContainer
+                                            else MaterialTheme.colorScheme.surfaceContainerHighest
+                                        )
+                                        .border(
+                                            width = 2.dp,
+                                            color = if (isSelected) MaterialTheme.colorScheme.primary else Color.Transparent,
+                                            shape = RoundedCornerShape(8.dp)
+                                        )
+                                        .clickable {
+                                            appSettings.crosshairStyle = index
+                                            crosshairStyle = index
+                                        },
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Icon(
+                                        painter = painterResource(resId),
+                                        contentDescription = "Style $index",
+                                        tint = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Text(
+                    text = "Color",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start)
+                ) {
+                    presetColors.forEach { (colorVal, composeColor) ->
+                        val isSelected = crosshairColor == colorVal
+                        Box(
+                            modifier = Modifier
+                                .size(28.dp)
+                                .clip(CircleShape)
+                                .background(composeColor)
+                                .border(
+                                    width = 2.dp,
+                                    color = if (isSelected) MaterialTheme.colorScheme.onSurface else Color.Transparent,
+                                    shape = CircleShape
+                                )
+                                .clickable {
+                                    appSettings.crosshairColor = colorVal
+                                    crosshairColor = colorVal
+                                }
+                        )
+                    }
+                }
+
+                Column {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = "Size",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Text(
+                            text = "${crosshairSize}dp",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    Slider(
+                        value = crosshairSize.toFloat(),
+                        onValueChange = {
+                            val rounded = it.roundToInt()
+                            appSettings.crosshairSize = rounded
+                            crosshairSize = rounded
+                        },
+                        valueRange = 24f..64f,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+
+                Column {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = "Opacity",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Text(
+                            text = "${(crosshairOpacity * 100).roundToInt()}%",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    Slider(
+                        value = crosshairOpacity,
+                        onValueChange = {
+                            appSettings.crosshairOpacity = it
+                            crosshairOpacity = it
+                        },
+                        valueRange = 0.2f..1f,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Position Tuning",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        if (crosshairOffsetX != 0 || crosshairOffsetY != 0) {
+                            Text(
+                                text = "Reset",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.clickable {
+                                    appSettings.crosshairOffsetX = 0
+                                    appSettings.crosshairOffsetY = 0
+                                    crosshairOffsetX = 0
+                                    crosshairOffsetY = 0
+                                }
+                            )
+                        }
+                    }
+
+                    Column {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = "X Offset",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            Text(
+                                text = "${if (crosshairOffsetX > 0) "+" else ""}${crosshairOffsetX}dp",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                        Slider(
+                            value = crosshairOffsetX.toFloat(),
+                            onValueChange = {
+                                val rounded = it.roundToInt()
+                                appSettings.crosshairOffsetX = rounded
+                                crosshairOffsetX = rounded
+                            },
+                            valueRange = -100f..100f,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
+
+                    Column {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = "Y Offset",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            Text(
+                                text = "${if (crosshairOffsetY > 0) "+" else ""}${crosshairOffsetY}dp",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                        Slider(
+                            value = crosshairOffsetY.toFloat(),
+                            onValueChange = {
+                                val rounded = it.roundToInt()
+                                appSettings.crosshairOffsetY = rounded
+                                crosshairOffsetY = rounded
+                            },
+                            valueRange = -100f..100f,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
 

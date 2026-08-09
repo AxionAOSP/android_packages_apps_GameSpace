@@ -73,11 +73,64 @@ class SettingsViewModel @Inject constructor(
     var autoDnd by mutableStateOf(appSettings.autoDnd)
         private set
 
+    var crosshairEnabled by mutableStateOf(appSettings.crosshairEnabled)
+        private set
+
+    var crosshairStyle by mutableIntStateOf(appSettings.crosshairStyle)
+        private set
+
+    var crosshairSize by mutableIntStateOf(appSettings.crosshairSize)
+        private set
+
+    var crosshairColor by mutableIntStateOf(appSettings.crosshairColor)
+        private set
+
+    var crosshairOpacity by mutableFloatStateOf(appSettings.crosshairOpacity)
+        private set
+
+    var crosshairOffsetX by mutableIntStateOf(appSettings.crosshairOffsetX)
+        private set
+
+    var crosshairOffsetY by mutableIntStateOf(appSettings.crosshairOffsetY)
+        private set
+
     val isBypassSupported = Build.MANUFACTURER.equals("Google", ignoreCase = true) 
             || SystemProperties.getBoolean("persist.sys.ax_chg_bypass", false)
 
     init {
         loadRegisteredGames()
+    }
+
+    fun updateCrosshairEnabled(enabled: Boolean) {
+        crosshairEnabled = enabled
+        appSettings.crosshairEnabled = enabled
+    }
+
+    fun updateCrosshairStyle(style: Int) {
+        crosshairStyle = style
+        appSettings.crosshairStyle = style
+    }
+
+    fun updateCrosshairSize(size: Int) {
+        crosshairSize = size
+        appSettings.crosshairSize = size
+    }
+
+    fun updateCrosshairColor(color: Int) {
+        crosshairColor = color
+        appSettings.crosshairColor = color
+    }
+
+    fun updateCrosshairOpacity(opacity: Float) {
+        crosshairOpacity = opacity
+        appSettings.crosshairOpacity = opacity
+    }
+
+    fun updateCrosshairOffsets(x: Int, y: Int) {
+        crosshairOffsetX = x
+        crosshairOffsetY = y
+        appSettings.crosshairOffsetX = x
+        appSettings.crosshairOffsetY = y
     }
 
     fun updateCallOverlay(enabled: Boolean) {

@@ -27,6 +27,7 @@ import android.content.res.Configuration
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.content.SharedPreferences
 import android.util.Log
 import android.view.WindowManager
 import com.android.axion.platform.AxPlatformClient
@@ -39,6 +40,7 @@ import io.chaldeaprjkt.gamespace.gamebar.brightness.BrightnessInteractor
 import io.chaldeaprjkt.gamespace.gamebar.fps.FpsInteractor
 import io.chaldeaprjkt.gamespace.gamebar.mapper.MapperController
 import io.chaldeaprjkt.gamespace.gamebar.tiles.TileRepository
+import io.chaldeaprjkt.gamespace.gamebar.tiles.ToggleableTile
 import io.chaldeaprjkt.gamespace.utils.GameModeUtils
 import io.chaldeaprjkt.gamespace.utils.ScreenUtils
 import javax.inject.Inject
@@ -62,6 +64,21 @@ class SessionService : Hilt_SessionService() {
     private lateinit var sidebar: GameSidebar
     private lateinit var mapperController: MapperController
     private lateinit var platform: AxPlatformClient
+    private lateinit var crosshairController: CrosshairController
+
+    private val preferenceListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
+        if (key != null && (
+            key.endsWith(AppSettings.KEY_CROSSHAIR_ENABLED) ||
+            key.endsWith(AppSettings.KEY_CROSSHAIR_STYLE) ||
+            key.endsWith(AppSettings.KEY_CROSSHAIR_SIZE) ||
+            key.endsWith(AppSettings.KEY_CROSSHAIR_COLOR) ||
+            key.endsWith(AppSettings.KEY_CROSSHAIR_OPACITY) ||
+            key.endsWith(AppSettings.KEY_CROSSHAIR_OFFSET_X) ||
+            key.endsWith(AppSettings.KEY_CROSSHAIR_OFFSET_Y)
+        )) {
+            crosshairController.updateState()
+        }
+    }
 
     private var dndEnabledByUs = false
     private var previousDndFilter = NotificationManager.INTERRUPTION_FILTER_ALL
@@ -81,6 +98,8 @@ class SessionService : Hilt_SessionService() {
 
         val windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
         val mainHandler = Handler(Looper.getMainLooper())
+
+        crosshairController = CrosshairController(this, windowManager, appSettings)
 
         mapperController = MapperController(
             context = this,
@@ -144,6 +163,13 @@ class SessionService : Hilt_SessionService() {
         
         applyAutoDnd()
 
+        appSettings.activeGamePackage = packageName
+        val crosshairTile = tileRepository.allAvailableTiles.find { it.id == "crosshair" } as? ToggleableTile
+        crosshairTile?.state?.value = appSettings.crosshairEnabled
+
+        appSettings.registerListener(preferenceListener)
+        crosshairController.updateState()
+
         sidebar.onGameStart(packageName)
 
         callListener.init()
@@ -151,6 +177,10 @@ class SessionService : Hilt_SessionService() {
 
     private fun stopGameSession() {
         Log.i(TAG, "Stopping game session")
+
+        appSettings.unregisterListener(preferenceListener)
+        appSettings.activeGamePackage = null
+        crosshairController.hideCrosshair()
 
         sidebar.onGameLeave()
         session.unregister()

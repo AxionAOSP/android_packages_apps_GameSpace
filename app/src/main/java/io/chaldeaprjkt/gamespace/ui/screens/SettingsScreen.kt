@@ -6,7 +6,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -18,6 +25,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.material3.Slider
+import kotlin.math.roundToInt
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
@@ -223,6 +235,184 @@ fun SettingsScreen(
                         valueLabel = "${viewModel.menuOpacity.toInt()}%",
                         icon = painterResource(R.drawable.materialsymbols_ic_opacity_rounded_filled)
                     )
+                }
+            }
+
+            item {
+                Spacer(modifier = Modifier.height(16.dp))
+                SettingsSection(title = stringResource(R.string.crosshair_settings_title)) {
+                    SettingsSwitch(
+                        title = "Enable Crosshair Overlay",
+                        summary = stringResource(R.string.crosshair_settings_summary),
+                        checked = viewModel.crosshairEnabled,
+                        onCheckedChange = { viewModel.updateCrosshairEnabled(it) },
+                        icon = painterResource(R.drawable.materialsymbols_ic_adjust_rounded_filled)
+                    )
+
+                    if (viewModel.crosshairEnabled) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 24.dp, vertical = 12.dp),
+                            verticalArrangement = Arrangement.spacedBy(16.dp)
+                        ) {
+                            Text(
+                                text = "Crosshair Style",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                            val styles = listOf(
+                                1 to R.drawable.crosshair_style_1,
+                                2 to R.drawable.crosshair_style_2,
+                                3 to R.drawable.crosshair_style_3,
+                                4 to R.drawable.crosshair_style_4,
+                                5 to R.drawable.crosshair_style_5,
+                                6 to R.drawable.crosshair_style_6,
+                                7 to R.drawable.crosshair_style_7,
+                                8 to R.drawable.crosshair_style_8
+                            )
+                            Column(
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                styles.chunked(4).forEach { rowStyles ->
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                    ) {
+                                        rowStyles.forEach { (index, resId) ->
+                                            val isSelected = viewModel.crosshairStyle == index
+                                            Box(
+                                                modifier = Modifier
+                                                    .weight(1f)
+                                                    .aspectRatio(1f)
+                                                    .clip(RoundedCornerShape(8.dp))
+                                                    .background(
+                                                        if (isSelected) MaterialTheme.colorScheme.primaryContainer
+                                                        else MaterialTheme.colorScheme.surfaceVariant
+                                                    )
+                                                    .border(
+                                                        width = 2.dp,
+                                                        color = if (isSelected) MaterialTheme.colorScheme.primary else Color.Transparent,
+                                                        shape = RoundedCornerShape(8.dp)
+                                                    )
+                                                    .clickable {
+                                                        viewModel.updateCrosshairStyle(index)
+                                                    },
+                                                contentAlignment = Alignment.Center
+                                            ) {
+                                                Icon(
+                                                    painter = painterResource(resId),
+                                                    contentDescription = "Style $index",
+                                                    tint = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                                                    modifier = Modifier.size(32.dp)
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            Text(
+                                text = "Crosshair Color",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                            val presetColors = listOf(
+                                0xFF00FF00.toInt() to Color(0xFF00FF00), // Green
+                                0xFFFF0000.toInt() to Color(0xFFFF0000), // Red
+                                0xFF00FFFF.toInt() to Color(0xFF00FFFF), // Cyan
+                                0xFFFFFF00.toInt() to Color(0xFFFFFF00), // Yellow
+                                0xFFFFFFFF.toInt() to Color(0xFFFFFFFF), // White
+                                0xFF2196F3.toInt() to Color(0xFF2196F3)  // Blue
+                            )
+
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .horizontalScroll(rememberScrollState()),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                presetColors.forEach { (colorVal, composeColor) ->
+                                    val isSelected = viewModel.crosshairColor == colorVal
+                                    Box(
+                                        modifier = Modifier
+                                            .size(32.dp)
+                                            .clip(CircleShape)
+                                            .background(composeColor)
+                                            .border(
+                                                width = 2.dp,
+                                                color = if (isSelected) MaterialTheme.colorScheme.onSurface else Color.Transparent,
+                                                shape = CircleShape
+                                            )
+                                            .clickable {
+                                                viewModel.updateCrosshairColor(colorVal)
+                                            }
+                                    )
+                                }
+                            }
+                        }
+
+                        SettingsSlider(
+                            title = "Size",
+                            value = viewModel.crosshairSize.toFloat(),
+                            onValueChange = { viewModel.updateCrosshairSize(it.roundToInt()) },
+                            valueRange = 24f..64f,
+                            valueLabel = "${viewModel.crosshairSize}dp",
+                            icon = painterResource(R.drawable.ic_panel)
+                        )
+
+                        SettingsSlider(
+                            title = "Opacity",
+                            value = viewModel.crosshairOpacity,
+                            onValueChange = { viewModel.updateCrosshairOpacity(it) },
+                            valueRange = 0.2f..1f,
+                            valueLabel = "${(viewModel.crosshairOpacity * 100).roundToInt()}%",
+                            icon = painterResource(R.drawable.materialsymbols_ic_opacity_rounded_filled)
+                        )
+
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 24.dp, vertical = 8.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "Position Tuning",
+                                style = MaterialTheme.typography.titleSmall,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                            if (viewModel.crosshairOffsetX != 0 || viewModel.crosshairOffsetY != 0) {
+                                Text(
+                                    text = "Reset Position",
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.clickable {
+                                        viewModel.updateCrosshairOffsets(0, 0)
+                                    }
+                                )
+                            }
+                        }
+
+                        SettingsSlider(
+                            title = "X Offset",
+                            value = viewModel.crosshairOffsetX.toFloat(),
+                            onValueChange = { viewModel.updateCrosshairOffsets(it.roundToInt(), viewModel.crosshairOffsetY) },
+                            valueRange = -100f..100f,
+                            valueLabel = "${if (viewModel.crosshairOffsetX > 0) "+" else ""}${viewModel.crosshairOffsetX}dp",
+                            icon = painterResource(R.drawable.ic_drag)
+                        )
+
+                        SettingsSlider(
+                            title = "Y Offset",
+                            value = viewModel.crosshairOffsetY.toFloat(),
+                            onValueChange = { viewModel.updateCrosshairOffsets(viewModel.crosshairOffsetX, it.roundToInt()) },
+                            valueRange = -100f..100f,
+                            valueLabel = "${if (viewModel.crosshairOffsetY > 0) "+" else ""}${viewModel.crosshairOffsetY}dp",
+                            icon = painterResource(R.drawable.ic_drag)
+                        )
+                    }
                 }
             }
 
