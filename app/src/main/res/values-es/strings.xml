@@ -111,6 +111,8 @@
     <string name="close_menu">Cerrar menú</string>
     <string name="notifications">Notificaciones</string>
     <string name="display_gestures">Mostrar gestos &amp;</string>
+    <string name="crosshair_settings_title">Custom Crosshair</string>
+    <string name="crosshair_settings_summary">Show centered custom aiming reticle overlays on screen</string>
     <string name="no_games_added">No hay juegos añadidos aún</string>
     <string name="ok">Aceptar</string>
     <string name="cancel">Cancelar</string>
@@ -154,6 +156,7 @@
     <!-- Tile Labels -->
     <string name="tile_danmaku">Notificaciones Flotantes</string>
     <string name="tile_stay_awake">Mantener pantalla activa</string>
+    <string name="tile_crosshair">Crosshair</string>
     <string name="tile_wifi">Wi-Fi</string>
     <string name="tile_dnd">No molestar</string>
     <string name="tile_fps_info">Información de FPS</string>
