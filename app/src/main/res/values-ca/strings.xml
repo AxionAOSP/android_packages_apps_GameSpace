@@ -111,6 +111,8 @@
     <string name="close_menu">Close menu</string>
     <string name="notifications">Notificacions</string>
     <string name="display_gestures">Display &amp; Gestures</string>
+    <string name="crosshair_settings_title">Custom Crosshair</string>
+    <string name="crosshair_settings_summary">Show centered custom aiming reticle overlays on screen</string>
     <string name="no_games_added">No games added yet</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
@@ -154,6 +156,7 @@
     <!-- Tile Labels -->
     <string name="tile_danmaku">Danmaku</string>
     <string name="tile_stay_awake">Stay Awake</string>
+    <string name="tile_crosshair">Crosshair</string>
     <string name="tile_wifi">Wi-Fi</string>
     <string name="tile_dnd">DND</string>
     <string name="tile_fps_info">FPS Info</string>
