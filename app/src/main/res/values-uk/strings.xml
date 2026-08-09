@@ -111,6 +111,8 @@
     <string name="close_menu">Закрити меню</string>
     <string name="notifications">Сповіщення</string>
     <string name="display_gestures">Дисплей &amp; жести</string>
+    <string name="crosshair_settings_title">Custom Crosshair</string>
+    <string name="crosshair_settings_summary">Show centered custom aiming reticle overlays on screen</string>
     <string name="no_games_added">Ігор ще не додано</string>
     <string name="ok">OK</string>
     <string name="cancel">Скасувати</string>
@@ -154,6 +156,7 @@
     <!-- Tile Labels -->
     <string name="tile_danmaku">Данмаку</string>
     <string name="tile_stay_awake">Не засинати</string>
+    <string name="tile_crosshair">Crosshair</string>
     <string name="tile_wifi">Wi-Fi</string>
     <string name="tile_dnd">Не турбувати</string>
     <string name="tile_fps_info">Інформація про FPS</string>
