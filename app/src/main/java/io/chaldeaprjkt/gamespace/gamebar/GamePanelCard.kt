@@ -38,6 +38,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.*
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.pager.*
 import androidx.compose.foundation.shape.*
 import androidx.compose.material3.*
@@ -89,6 +90,7 @@ private val RoundedTileShape = RoundedCornerShape(100f)
 @Composable
 fun GamePanelCard(
     appSettings: AppSettings,
+    musicController: MusicController,
     interactor: BrightnessInteractor,
     fpsInteractor: FpsInteractor,
     apps: List<AppInfo>,
@@ -122,6 +124,7 @@ fun GamePanelCard(
     ) {
         GamePanelContent(
             appSettings = appSettings,
+            musicController = musicController,
             apps = apps,
             headerExpanded = headerExpanded,
             onToggleExpand = { headerExpanded = !headerExpanded },
@@ -142,6 +145,7 @@ fun GamePanelCard(
 @Composable
 fun GamePanelContent(
     appSettings: AppSettings,
+    musicController: MusicController,
     apps: List<AppInfo>,
     headerExpanded: Boolean,
     onToggleExpand: () -> Unit,
@@ -181,6 +185,10 @@ fun GamePanelContent(
                 onEditClick = { isEditing = true },
                 tileRepository = tileRepository
             )
+
+            if (appSettings.musicPlayerEnabled) {
+                MusicPlayerCard(musicController = musicController)
+            }
 
             if (apps.isEmpty() == false) {
                 QuickStartAppSidebar(apps = apps)
@@ -573,6 +581,12 @@ fun TileEditPanel(
                 title = stringResource(R.string.fps_graph),
                 checked = tileRepository.isFpsGraphVisible.value,
                 onCheckedChange = { tileRepository.setFpsGraphEnabled(it) }
+            )
+
+            SettingToggleRow(
+                title = stringResource(R.string.music_player_enabled_title),
+                checked = tileRepository.isMusicPlayerVisible.value,
+                onCheckedChange = { tileRepository.setMusicPlayerEnabled(it) }
             )
         }
 
@@ -1646,6 +1660,188 @@ fun CrosshairSettingsCard(
                             modifier = Modifier.fillMaxWidth()
                         )
                     }
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun MusicPlayerCard(
+    musicController: MusicController,
+    modifier: Modifier = Modifier
+) {
+    val trackTitle by remember { musicController.trackTitle }
+    val artistName by remember { musicController.artistName }
+    val isPlaying by remember { musicController.isPlaying }
+    val hasActiveMedia by remember { musicController.hasActiveMedia }
+    val albumArt by remember { musicController.albumArt }
+    val activeApp by remember { musicController.activeApp }
+    val activeAppIcon by remember { musicController.activeAppIcon }
+
+    val displayTitle = if (hasActiveMedia) trackTitle else stringResource(R.string.no_music_playing)
+    val displayArtist = if (hasActiveMedia) artistName else stringResource(R.string.tap_to_play)
+
+    val infiniteTransition = rememberInfiniteTransition(label = "pulse")
+    val pulseAlpha by if (isPlaying) {
+        infiniteTransition.animateFloat(
+            initialValue = 0.15f,
+            targetValue = 0.45f,
+            animationSpec = infiniteRepeatable(
+                animation = tween(1500, easing = FastOutSlowInEasing),
+                repeatMode = RepeatMode.Reverse
+            ),
+            label = "pulseAlpha"
+        )
+    } else {
+        rememberUpdatedState(0f)
+    }
+
+    Card(
+        modifier = modifier
+            .fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier.size(48.dp)
+            ) {
+                if (albumArt != null) {
+                    Image(
+                        bitmap = albumArt!!.asImageBitmap(),
+                        contentDescription = "Album Art",
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clip(RoundedCornerShape(8.dp)),
+                        contentScale = ContentScale.Crop
+                    )
+                } else {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(MaterialTheme.colorScheme.surface),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_music_note),
+                            contentDescription = "No Art",
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+                }
+
+                if (activeAppIcon != null) {
+                    val appIconBitmap = remember(activeAppIcon) {
+                        activeAppIcon!!.toBitmap(24, 24).asImageBitmap()
+                    }
+                    Box(
+                        modifier = Modifier
+                            .size(18.dp)
+                            .align(Alignment.BottomEnd)
+                            .offset(x = 4.dp, y = 4.dp)
+                            .clip(CircleShape)
+                            .background(MaterialTheme.colorScheme.surfaceVariant)
+                            .padding(1.5.dp)
+                    ) {
+                        Image(
+                            bitmap = appIconBitmap,
+                            contentDescription = "App Icon",
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .clip(CircleShape)
+                        )
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.width(12.dp))
+
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = 8.dp),
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = displayTitle,
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    maxLines = 1,
+                    modifier = Modifier.basicMarquee()
+                )
+                Text(
+                    text = displayArtist,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    maxLines = 1,
+                    modifier = Modifier.basicMarquee()
+                )
+            }
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(28.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.surface)
+                        .clickable { musicController.skipToPrevious() },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_arrow_right),
+                        contentDescription = "Previous",
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(12.dp)
+                    )
+                }
+
+                Box(
+                    modifier = Modifier
+                        .size(36.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.primaryContainer)
+                        .border(
+                            width = 1.5.dp,
+                            color = MaterialTheme.colorScheme.primary.copy(alpha = if (isPlaying) pulseAlpha else 0f),
+                            shape = CircleShape
+                        )
+                        .clickable { musicController.togglePlayPause() },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        painter = painterResource(if (isPlaying) R.drawable.ic_pause else R.drawable.ic_play),
+                        contentDescription = "Play/Pause",
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(16.dp)
+                    )
+                }
+
+                Box(
+                    modifier = Modifier
+                        .size(28.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.surface)
+                        .clickable { musicController.skipToNext() },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_arrow_left),
+                        contentDescription = "Next",
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(12.dp)
+                    )
                 }
             }
         }

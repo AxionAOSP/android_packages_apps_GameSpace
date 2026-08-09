@@ -235,6 +235,14 @@ fun SettingsScreen(
                         valueLabel = "${viewModel.menuOpacity.toInt()}%",
                         icon = painterResource(R.drawable.materialsymbols_ic_opacity_rounded_filled)
                     )
+
+                    SettingsSwitch(
+                        title = stringResource(R.string.music_player_enabled_title),
+                        summary = stringResource(R.string.music_player_enabled_summary),
+                        checked = viewModel.musicPlayerEnabled,
+                        onCheckedChange = { viewModel.updateMusicPlayerEnabled(it) },
+                        icon = painterResource(R.drawable.materialsymbols_ic_volume_up_rounded_filled)
+                    )
                 }
             }
 

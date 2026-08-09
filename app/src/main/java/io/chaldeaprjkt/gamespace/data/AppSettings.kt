@@ -139,6 +139,10 @@ class AppSettings @Inject constructor(private val context: Context) {
         get() = db.getInt(getPrefKey(KEY_CROSSHAIR_OFFSET_Y), db.getInt(KEY_CROSSHAIR_OFFSET_Y, 0))
         set(value) = db.edit().putInt(getPrefKey(KEY_CROSSHAIR_OFFSET_Y), value).apply()
 
+    var musicPlayerEnabled: Boolean
+        get() = db.getBoolean(KEY_MUSIC_PLAYER_ENABLED, true)
+        set(value) = db.edit().putBoolean(KEY_MUSIC_PLAYER_ENABLED, value).apply()
+
     companion object {
         const val KEY_AUTO_BRIGHTNESS_DISABLE = "gamespace_auto_brightness_disabled"
         const val KEY_3SCREENSHOT_DISABLE = "gamespace_tfgesture_disabled"
@@ -162,5 +166,6 @@ class AppSettings @Inject constructor(private val context: Context) {
         const val KEY_CROSSHAIR_OPACITY = "gamespace_crosshair_opacity"
         const val KEY_CROSSHAIR_OFFSET_X = "gamespace_crosshair_offset_x"
         const val KEY_CROSSHAIR_OFFSET_Y = "gamespace_crosshair_offset_y"
+        const val KEY_MUSIC_PLAYER_ENABLED = "gamespace_music_player_enabled"
     }
 }

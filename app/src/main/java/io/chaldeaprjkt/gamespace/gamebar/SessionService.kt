@@ -65,6 +65,7 @@ class SessionService : Hilt_SessionService() {
     private lateinit var mapperController: MapperController
     private lateinit var platform: AxPlatformClient
     private lateinit var crosshairController: CrosshairController
+    private lateinit var musicController: MusicController
 
     private val preferenceListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
         if (key != null && (
@@ -77,6 +78,16 @@ class SessionService : Hilt_SessionService() {
             key.endsWith(AppSettings.KEY_CROSSHAIR_OFFSET_Y)
         )) {
             crosshairController.updateState()
+        }
+
+        if (key != null && key.endsWith(AppSettings.KEY_MUSIC_PLAYER_ENABLED)) {
+            if (appSettings.musicPlayerEnabled) {
+                musicController.register()
+            } else {
+                musicController.unregister()
+                // Force state reset so card hides when disabled
+                musicController.hasActiveMedia.value = false
+            }
         }
     }
 
@@ -100,6 +111,7 @@ class SessionService : Hilt_SessionService() {
         val mainHandler = Handler(Looper.getMainLooper())
 
         crosshairController = CrosshairController(this, windowManager, appSettings)
+        musicController = MusicController(this)
 
         mapperController = MapperController(
             context = this,
@@ -121,6 +133,7 @@ class SessionService : Hilt_SessionService() {
             settings = settings,
             tileRepository = tileRepository,
             mapperController = mapperController,
+            musicController = musicController,
         )
         sidebar.onCreate()
     }
@@ -167,6 +180,10 @@ class SessionService : Hilt_SessionService() {
         val crosshairTile = tileRepository.allAvailableTiles.find { it.id == "crosshair" } as? ToggleableTile
         crosshairTile?.state?.value = appSettings.crosshairEnabled
 
+        if (appSettings.musicPlayerEnabled) {
+            musicController.register()
+        }
+
         appSettings.registerListener(preferenceListener)
         crosshairController.updateState()
 
@@ -181,6 +198,7 @@ class SessionService : Hilt_SessionService() {
         appSettings.unregisterListener(preferenceListener)
         appSettings.activeGamePackage = null
         crosshairController.hideCrosshair()
+        musicController.unregister()
 
         sidebar.onGameLeave()
         session.unregister()

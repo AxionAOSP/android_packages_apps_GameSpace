@@ -77,6 +77,7 @@ class GameSidebar(
     private val settings: SystemSettings,
     private val tileRepository: TileRepository,
     private val mapperController: MapperController,
+    private val musicController: MusicController,
 ) {
     private val gameBarLayoutParam = createGameBarLayoutParam()
     private val panelLayoutParam = createPanelLayoutParam()
@@ -436,6 +437,7 @@ class GameSidebar(
             ) {
                 GamePanelCard(
                     appSettings = appSettings,
+                    musicController = musicController,
                     interactor = brightnessInteractor,
                     fpsInteractor = fpsInteractor,
                     apps = apps,

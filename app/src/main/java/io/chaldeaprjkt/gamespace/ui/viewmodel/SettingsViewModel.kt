@@ -73,6 +73,9 @@ class SettingsViewModel @Inject constructor(
     var autoDnd by mutableStateOf(appSettings.autoDnd)
         private set
 
+    var musicPlayerEnabled by mutableStateOf(appSettings.musicPlayerEnabled)
+        private set
+
     var crosshairEnabled by mutableStateOf(appSettings.crosshairEnabled)
         private set
 
@@ -181,6 +184,11 @@ class SettingsViewModel @Inject constructor(
     fun updateBypassChargeEnabled(enabled: Boolean) {
         bypassChargeEnabled = enabled
         systemSettings.bypassChargeEnabled = enabled
+    }
+
+    fun updateMusicPlayerEnabled(enabled: Boolean) {
+        musicPlayerEnabled = enabled
+        appSettings.musicPlayerEnabled = enabled
     }
 
     fun updateIconIdleAlpha(alpha: Float) {
