@@ -214,4 +214,9 @@
     <string name="cd_edit_tiles">Edit Tiles</string>
     <string name="cd_collapse">Invouwen</string>
     <string name="cd_expand">Uitvouwen</string>
+    <!-- Music Player -->
+    <string name="music_player_enabled_title">In-Game Music Controller</string>
+    <string name="music_player_enabled_summary">Show global media playback controls inside the floating sidebar</string>
+    <string name="no_music_playing">No Music Playing</string>
+    <string name="tap_to_play">Tap to start playing</string>
 </resources>
