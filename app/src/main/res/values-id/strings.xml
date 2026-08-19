@@ -64,7 +64,7 @@
         <item>Performa</item>
         <item>Baterai</item>
     </string-array>
-    <string name="per_app_angle_title">Graphics driver</string>
+    <string name="per_app_angle_title">Driver Grafis</string>
     <string name="per_app_unregister">Hapus %1$s dari pustaka</string>
     <string name="adb_disabled_summary">Nonaktifkan sementara proses debug USB ADB saat di dalam game</string>
     <string name="adb_disabled_title">Nonaktifkan proses debug USB</string>
@@ -111,6 +111,8 @@
     <string name="close_menu">Tutup menu</string>
     <string name="notifications">Notifikasi</string>
     <string name="display_gestures">Tampilan &amp; Gestur</string>
+    <string name="crosshair_settings_title">Custom Crosshair</string>
+    <string name="crosshair_settings_summary">Show centered custom aiming reticle overlays on screen</string>
     <string name="no_games_added">Belum ada game yang ditambahkan</string>
     <string name="ok">OK</string>
     <string name="cancel">Batal</string>
@@ -137,13 +139,13 @@
     <string name="fps_graph">Grafik FPS</string>
     <string name="selected_tiles">Ubin Terpilih</string>
     <string name="available_tiles">Ubin Tersedia</string>
-    <string name="drag_tiles_here">Drag tiles here</string>
-    <string name="all_tiles_added">All tiles added</string>
+    <string name="drag_tiles_here">Seret ubin di sini</string>
+    <string name="all_tiles_added">Semua ubin telah ditambahkan</string>
     <string name="fps_stats">min %1$d | avg %2$d | max %3$d</string>
     <string name="add">Tambah</string>
-    <string name="view_details">View Details</string>
-    <string name="launch_game">Launch Game</string>
-    <string name="remove_game">Remove Game</string>
+    <string name="view_details">Lihat Rincian</string>
+    <string name="launch_game">Luncurkan game</string>
+    <string name="remove_game">Hapus Game</string>
     <string name="empty_library">No games in your library</string>
     <string name="add_first_game">Add Your First Game</string>
     <string name="per_app_settings">Game Settings</string>
@@ -154,6 +156,7 @@
     <!-- Tile Labels -->
     <string name="tile_danmaku">Danmaku</string>
     <string name="tile_stay_awake">Tetap bangun</string>
+    <string name="tile_crosshair">Crosshair</string>
     <string name="tile_wifi">Wi-Fi</string>
     <string name="tile_dnd">Jangan Ganggu</string>
     <string name="tile_fps_info">Info FPS</string>
@@ -211,4 +214,9 @@
     <string name="cd_edit_tiles">Edit ubin</string>
     <string name="cd_collapse">Runtuh</string>
     <string name="cd_expand">Perluas</string>
+    <!-- Music Player -->
+    <string name="music_player_enabled_title">In-Game Music Controller</string>
+    <string name="music_player_enabled_summary">Show global media playback controls inside the floating sidebar</string>
+    <string name="no_music_playing">No Music Playing</string>
+    <string name="tap_to_play">Tap to start playing</string>
 </resources>
