@@ -170,16 +170,16 @@
     <string name="tile_flashlight">Ліхтарик</string>
     <string name="tile_dark_mode">Темний режим</string>
     <string name="tile_location">Місцезнаходження</string>
-    <string name="tile_battery_saver">Режим економії заряду акумулятора</string>
+    <string name="tile_battery_saver">Енергозбереження</string>
     <string name="tile_hotspot">Точка доступу</string>
     <string name="tile_nfc">NFC</string>
-    <string name="tile_night_light">Нічник</string>
+    <string name="tile_night_light">Нічний режим</string>
     <string name="tile_aod">Завжди увімкнений дисплей</string>
     <string name="tile_data_saver">Економія даних</string>
     <string name="tile_color_inversion">Інверсія кольорів</string>
     <string name="tile_color_correction">Корекція кольору</string>
     <string name="tile_reduce_brightness">Зменшити яскравість</string>
-    <string name="tile_one_handed">Однією рукою</string>
+    <string name="tile_one_handed">Керування однією рукою</string>
     <string name="tile_heads_up">Спливаючі сповіщення</string>
     <string name="tile_auto_sync">Автоматична синхронізація</string>
     <string name="tile_camera_privacy">Камера</string>
@@ -188,23 +188,23 @@
     <string name="tile_usb_tether">USB-модем</string>
     <string name="tile_dream">Заставка</string>
     <string name="tile_reading_mode">Режим читання</string>
-    <string name="tile_power_share">Розповсюдження Сили</string>
-    <string name="tile_caffeine">Режим \"Заборона сну\"</string>
-    <string name="tile_vpn">Мережа VPN</string>
-    <string name="tile_cast">Транслювати</string>
+    <string name="tile_power_share">Зворотна зарядка</string>
+    <string name="tile_caffeine">Запобігання сну</string>
+    <string name="tile_vpn">VPN</string>
+    <string name="tile_cast">Трансляція</string>
     <string name="tile_profiles">Профілі</string>
-    <string name="tile_smart_pixels">Смарт Пікселі</string>
+    <string name="tile_smart_pixels">Розумні пікселі</string>
     <string name="tile_screen_record">Запис екрану</string>
     <string name="tile_screenshot">Скріншот</string>
     <!-- Icon Idle Transparency -->
-    <string name="icon_idle_alpha_title">Прозорість значка в режимі очікування</string>
+    <string name="icon_idle_alpha_title">Прозорість неактивних значків</string>
     <!-- Auto DND -->
     <string name="auto_dnd_title">Автоматичний режим «Не турбувати»</string>
-    <string name="auto_dnd_summary">Автоматично вмикати режим «Не турбувати» під час гри та відновлювати його після завершення</string>
+    <string name="auto_dnd_summary">Автоматично вмикати режим «Не турбувати» під час гри та вимикати після її завершення</string>
     <!-- Controller Mapper -->
     <string name="mapper_press_button">Натисніть кнопку на контролері або клавіатурі\u2026</string>
-    <string name="mapper_add_point">Додати точку дотику</string>
-    <string name="mapper_delete_point">Видалити точку дотику</string>
+    <string name="mapper_add_point">Додати точку натискання</string>
+    <string name="mapper_delete_point">Видалити точку натискання</string>
     <string name="mapper_map_controls">Елементи керування картою</string>
     <!-- Content Descriptions (Accessibility) -->
     <string name="cd_reject">Відхилити</string>
