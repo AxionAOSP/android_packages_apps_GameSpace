@@ -642,6 +642,32 @@ private fun GlobalSettingsPanel(
                         checked = viewModel.callOverlayEnabled,
                         onCheckedChange = { viewModel.updateCallOverlay(it) },
                     )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    HubSectionLabel(stringResource(R.string.in_game_calls_title))
+                    val callsModeOptions = listOf(
+                        0 to stringResource(R.string.in_game_calls_no_action),
+                        1 to stringResource(R.string.in_game_calls_auto_answer),
+                        2 to stringResource(R.string.in_game_calls_auto_reject)
+                    )
+                    HubSelector(
+                        options = callsModeOptions,
+                        selectedKey = viewModel.callsMode,
+                        onSelect = { viewModel.updateCallsMode(it) }
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    HubSectionLabel(stringResource(R.string.ringer_mode_title))
+                    val ringerModeOptions = listOf(
+                        0 to stringResource(R.string.ringer_mode_silent),
+                        1 to stringResource(R.string.ringer_mode_vibrate),
+                        2 to stringResource(R.string.ringer_mode_normal),
+                        3 to stringResource(R.string.ringer_mode_no_change)
+                    )
+                    HubSelector(
+                        options = ringerModeOptions,
+                        selectedKey = viewModel.ringerMode,
+                        onSelect = { viewModel.updateRingerMode(it) }
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
                     HubToggle(
                         label = stringResource(R.string.three_screenshot_disabled_title),
                         checked = viewModel.noThreeScreenshot,
