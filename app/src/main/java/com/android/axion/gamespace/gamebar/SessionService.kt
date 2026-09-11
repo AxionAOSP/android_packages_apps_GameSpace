@@ -1,0 +1,258 @@
+/*
+ * Copyright (C) 2021 Chaldeaprjkt
+ * Copyright (C) 2022-2024 crDroid Android Project
+ * Copyright (C) 2025 AxionOS
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.android.axion.gamespace.gamebar
+
+import android.annotation.SuppressLint
+import android.app.GameManager
+import android.app.NotificationManager
+import android.app.Service
+import android.content.Context
+import android.content.Intent
+import android.content.res.Configuration
+import android.os.Handler
+import android.os.IBinder
+import android.os.Looper
+import android.content.SharedPreferences
+import android.util.Log
+import android.view.WindowManager
+import com.android.axion.platform.AxPlatformClient
+import dagger.hilt.android.AndroidEntryPoint
+import com.google.gson.Gson
+import com.android.axion.gamespace.data.AppSettings
+import com.android.axion.gamespace.data.GameSession
+import com.android.axion.gamespace.data.SystemSettings
+import com.android.axion.gamespace.gamebar.brightness.BrightnessInteractor
+import com.android.axion.gamespace.gamebar.fps.FpsInteractor
+import com.android.axion.gamespace.gamebar.mapper.MapperController
+import com.android.axion.gamespace.gamebar.tiles.TileRepository
+import com.android.axion.gamespace.gamebar.tiles.ToggleableTile
+import com.android.axion.gamespace.utils.GameModeUtils
+import com.android.axion.gamespace.utils.ScreenUtils
+import javax.inject.Inject
+
+@AndroidEntryPoint(Service::class)
+class SessionService : Hilt_SessionService() {
+    @Inject lateinit var appSettings: AppSettings
+    @Inject lateinit var settings: SystemSettings
+    @Inject lateinit var session: GameSession
+    @Inject lateinit var screenUtils: ScreenUtils
+    @Inject lateinit var gameModeUtils: GameModeUtils
+    @Inject lateinit var callListener: CallListener
+    @Inject lateinit var danmakuService: DanmakuService
+    @Inject lateinit var brightnessInteractor: BrightnessInteractor
+    @Inject lateinit var fpsInteractor: FpsInteractor
+    @Inject lateinit var tileRepository: TileRepository
+    @Inject lateinit var gson: Gson
+
+    private var currentPackage: String? = null
+    private lateinit var gameManager: GameManager
+    private lateinit var sidebar: GameSidebar
+    private lateinit var mapperController: MapperController
+    private lateinit var platform: AxPlatformClient
+    private lateinit var crosshairController: CrosshairController
+    private lateinit var musicController: MusicController
+
+    private val preferenceListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
+        if (key != null && (
+            key.endsWith(AppSettings.KEY_CROSSHAIR_ENABLED) ||
+            key.endsWith(AppSettings.KEY_CROSSHAIR_STYLE) ||
+            key.endsWith(AppSettings.KEY_CROSSHAIR_SIZE) ||
+            key.endsWith(AppSettings.KEY_CROSSHAIR_COLOR) ||
+            key.endsWith(AppSettings.KEY_CROSSHAIR_OPACITY) ||
+            key.endsWith(AppSettings.KEY_CROSSHAIR_OFFSET_X) ||
+            key.endsWith(AppSettings.KEY_CROSSHAIR_OFFSET_Y)
+        )) {
+            crosshairController.updateState()
+        }
+
+        if (key != null && key.endsWith(AppSettings.KEY_MUSIC_PLAYER_ENABLED)) {
+            if (appSettings.musicPlayerEnabled) {
+                musicController.register()
+            } else {
+                musicController.unregister()
+                // Force state reset so card hides when disabled
+                musicController.hasActiveMedia.value = false
+            }
+        }
+    }
+
+    private var dndEnabledByUs = false
+    private var previousDndFilter = NotificationManager.INTERRUPTION_FILTER_ALL
+
+    @SuppressLint("WrongConstant")
+    override fun onCreate() {
+        super.onCreate()
+        Log.d(TAG, "SessionService created")
+
+        platform = AxPlatformClient.getInstance()
+        platform.init(this)
+
+        gameManager = getSystemService(Context.GAME_SERVICE) as GameManager
+        gameModeUtils.bind(gameManager)
+
+        tileRepository.init(platform)
+
+        val windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
+        val mainHandler = Handler(Looper.getMainLooper())
+
+        crosshairController = CrosshairController(this, windowManager, appSettings)
+        musicController = MusicController(this)
+
+        mapperController = MapperController(
+            context = this,
+            wm = windowManager,
+            handler = mainHandler,
+            gson = gson,
+        )
+
+        sidebar = GameSidebar(
+            context = this,
+            wm = windowManager,
+            handler = mainHandler,
+            appSettings = appSettings,
+            screenUtils = screenUtils,
+            danmakuService = danmakuService,
+            brightnessInteractor = brightnessInteractor,
+            fpsInteractor = fpsInteractor,
+            gameModeUtils = gameModeUtils,
+            settings = settings,
+            tileRepository = tileRepository,
+            mapperController = mapperController,
+            musicController = musicController,
+        )
+        sidebar.onCreate()
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        if (intent?.action == ACTION_START) {
+            val packageName = intent.getStringExtra(EXTRA_PACKAGE_NAME)
+            if (packageName != null) {
+                startGameSession(packageName)
+            } else {
+                Log.e(TAG, "No package name provided, stopping")
+                stopSelf()
+            }
+        }
+        return START_NOT_STICKY
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        sidebar.onConfigurationChanged(newConfig)
+    }
+
+    private fun startGameSession(packageName: String) {
+        if (currentPackage == packageName) {
+            Log.d(TAG, "Session already active for $packageName")
+            return
+        }
+        
+        if (currentPackage != null) {
+            stopGameSession()
+        }
+        
+        Log.i(TAG, "Starting game session for $packageName")
+        currentPackage = packageName
+        
+        session.unregister()
+        session.register(packageName)
+        
+        applyGameModeConfig(packageName)
+        
+        applyAutoDnd()
+
+        appSettings.activeGamePackage = packageName
+        val crosshairTile = tileRepository.allAvailableTiles.find { it.id == "crosshair" } as? ToggleableTile
+        crosshairTile?.state?.value = appSettings.crosshairEnabled
+
+        if (appSettings.musicPlayerEnabled) {
+            musicController.register()
+        }
+
+        appSettings.registerListener(preferenceListener)
+        crosshairController.updateState()
+
+        sidebar.onGameStart(packageName)
+
+        callListener.init()
+    }
+
+    private fun stopGameSession() {
+        Log.i(TAG, "Stopping game session")
+
+        appSettings.unregisterListener(preferenceListener)
+        appSettings.activeGamePackage = null
+        crosshairController.hideCrosshair()
+        musicController.unregister()
+
+        sidebar.onGameLeave()
+        session.unregister()
+        callListener.destroy()
+        restoreAutoDnd()
+
+        currentPackage = null
+    }
+
+    private fun applyAutoDnd() {
+        if (!appSettings.autoDnd) return
+        val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val currentFilter = nm.currentInterruptionFilter
+        if (currentFilter == NotificationManager.INTERRUPTION_FILTER_ALL ||
+            currentFilter == NotificationManager.INTERRUPTION_FILTER_UNKNOWN) {
+            previousDndFilter = currentFilter
+            nm.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_PRIORITY)
+            dndEnabledByUs = true
+        }
+    }
+
+    private fun restoreAutoDnd() {
+        if (!dndEnabledByUs) return
+        dndEnabledByUs = false
+        val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        nm.setInterruptionFilter(previousDndFilter)
+    }
+
+    private fun applyGameModeConfig(app: String) {
+        val userGame = settings.userGames.firstOrNull { it.packageName == app }
+        val preferred = userGame?.mode ?: GameModeUtils.defaultPreferredMode
+        
+        gameModeUtils.activeGame = userGame
+        
+        val availableModes = gameManager.getAvailableGameModes(app)
+        if (availableModes.contains(preferred)) {
+            gameManager.setGameMode(app, preferred)
+        }
+    }
+
+    override fun onDestroy() {
+        Log.d(TAG, "SessionService destroyed")
+        stopGameSession()
+        tileRepository.dispose()
+        gameModeUtils.unbind()
+        danmakuService.destroy()
+        super.onDestroy()
+    }
+
+    override fun onBind(intent: Intent?): IBinder? = null
+
+    companion object {
+        const val TAG = "SessionService"
+        const val ACTION_START = "game_start"
+        const val EXTRA_PACKAGE_NAME = "package_name"
+    }
+}

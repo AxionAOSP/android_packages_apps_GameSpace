@@ -16,7 +16,7 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="io.chaldeaprjkt.gamespace"
+    package="com.android.axion.gamespace"
     android:sharedUserId="android.uid.system">
 
     <uses-permission android:name="android.permission.GET_TASKS" />

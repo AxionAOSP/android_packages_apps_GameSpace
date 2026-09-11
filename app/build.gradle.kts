@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "io.chaldeaprjkt.gamespace"
+    namespace = "com.android.axion.gamespace"
     compileSdk = 36
 
     defaultConfig {
-        applicationId =  "io.chaldeaprjkt.gamespace"
+        applicationId =  "com.android.axion.gamespace"
         minSdk = 36
         targetSdk = 36
         versionCode = 100
