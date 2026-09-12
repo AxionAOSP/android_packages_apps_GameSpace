@@ -68,12 +68,6 @@
             android:excludeFromRecents="true"
             android:exported="false" />
 
-        <activity
-            android:name=".preferences.appselector.AppSelectorActivity"
-            android:excludeFromRecents="true"
-            android:exported="false"
-            android:label="@string/app_selector_label" />
-
         <service
             android:name=".gamebar.SessionService"
             android:exported="false"
