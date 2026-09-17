@@ -15,7 +15,7 @@
  */
 package com.android.axion.gamespace.gamebar.tiles
 
-import android.app.ActivityManager
+import com.android.internal.memory.AxMemoryManager
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
@@ -267,12 +267,19 @@ class TileRepository @Inject constructor(
                 label = context.getString(R.string.tile_boost_memory),
                 icon = R.drawable.materialsymbols_ic_speed_rounded_filled,
                 action = {
-                    try {
-                        ActivityManager.getService().releaseMemory(606, 60, false, false)
-                    } catch (_: Exception) {}
+                    val freedMb = try {
+                        AxMemoryManager.releaseMemory()
+                    } catch (_: Exception) {
+                        -1L
+                    }
+                    val msg = if (freedMb > 0) {
+                        "${context.getString(R.string.boost_memory)} (${freedMb}MB freed)"
+                    } else {
+                        context.getString(R.string.boost_memory)
+                    }
                     Toast.makeText(
                         context,
-                        context.getString(R.string.boost_memory),
+                        msg,
                         Toast.LENGTH_SHORT,
                     ).show()
                 },
