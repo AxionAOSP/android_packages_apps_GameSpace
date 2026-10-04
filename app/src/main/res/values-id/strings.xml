@@ -149,7 +149,7 @@
     <string name="empty_library">No games in your library</string>
     <string name="add_first_game">Add Your First Game</string>
     <string name="per_app_settings">Game Settings</string>
-    <string name="search_apps">Search apps\u2026</string>
+    <string name="search_apps">\u2026</string>
     <string name="about_github">GitHub</string>
     <string name="about_translate">Translate</string>
     <string name="about_donate">Donate</string>
@@ -202,7 +202,7 @@
     <string name="auto_dnd_title">Auto Do Not Disturb</string>
     <string name="auto_dnd_summary">Automatically enable DND while in-game and restore when done</string>
     <!-- Controller Mapper -->
-    <string name="mapper_press_button">Press a button on your controller or keyboard\u2026</string>
+    <string name="mapper_press_button">\u2026</string>
     <string name="mapper_add_point">Add tap point</string>
     <string name="mapper_delete_point">Delete tap point</string>
     <string name="mapper_map_controls">Map controls</string>
