@@ -217,6 +217,6 @@
     <!-- Music Player -->
     <string name="music_player_enabled_title">In-Game Music Controller</string>
     <string name="music_player_enabled_summary">Show global media playback controls inside the floating sidebar</string>
-    <string name="no_music_playing">No Music Playing</string>
-    <string name="tap_to_play">Tap to start playing</string>
+    <string name="no_music_playing">Müzik çalmıyor</string>
+    <string name="tap_to_play">Oynamaya başlamak için dokunun</string>
 </resources>
