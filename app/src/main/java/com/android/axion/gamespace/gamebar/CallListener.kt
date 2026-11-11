@@ -27,7 +27,6 @@ import android.graphics.BitmapFactory
 import android.graphics.PixelFormat
 import android.media.AudioDeviceInfo
 import android.media.AudioManager
-import android.media.AudioSystem
 import android.net.Uri
 import android.provider.ContactsContract
 import android.telecom.TelecomManager
@@ -82,16 +81,22 @@ class CallListener @Inject constructor(
     private val telecomManager = context.getSystemService(TelecomManager::class.java)!!
     private val windowManager = context.getSystemService(WindowManager::class.java)!!
 
-    private val callsMode = appSettings.callsMode
-    private val callOverlayEnabled = appSettings.callOverlayEnabled
-    private var previousAudioMode = audioManager.mode
+    private val callsMode: Int
+        get() = appSettings.callsMode
+    private val callOverlayEnabled: Boolean
+        get() = appSettings.callOverlayEnabled
+
+    private var isGameActive = false
+    private var isCallbackRegistered = false
+    private var pendingInGameAnswer = false
+    private var speakerForcedByUs = false
 
     private var ringerOverlay: ComposeView? = null
     private var isOverlayShowing = false
 
-    private val phoneStateListener = object: PhoneStateListener() {
+    private val phoneStateListener = object : PhoneStateListener() {
         override fun onCallStateChanged(state: Int, incomingNumber: String) {
-            if (state == TelephonyManager.CALL_STATE_RINGING && callOverlayEnabled) {
+            if (isGameActive && state == TelephonyManager.CALL_STATE_RINGING && callOverlayEnabled) {
                 showRingerOverlay(incomingNumber)
             }
         }
@@ -101,7 +106,9 @@ class CallListener @Inject constructor(
         override fun onCallStateChanged(state: Int) {
             when (state) {
                 TelephonyManager.CALL_STATE_RINGING -> {
-                    handleIncomingCall()
+                    if (isGameActive) {
+                        handleIncomingCall()
+                    }
                 }
                 TelephonyManager.CALL_STATE_OFFHOOK -> handleOffhookState()
                 TelephonyManager.CALL_STATE_IDLE -> handleIdleState()
@@ -110,21 +117,41 @@ class CallListener @Inject constructor(
     }
 
     fun init() {
-        telephonyManager.registerTelephonyCallback(context.mainExecutor, telephonyCallback)
+        isGameActive = true
+        if (!isCallbackRegistered) {
+            telephonyManager.registerTelephonyCallback(context.mainExecutor, telephonyCallback)
+            isCallbackRegistered = true
+        }
         telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE)
     }
 
     fun destroy() {
-        telephonyManager.unregisterTelephonyCallback(telephonyCallback)
+        isGameActive = false
+        pendingInGameAnswer = false
         dismissRingerOverlay(immediate = true)
         telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_NONE)
+        if (!speakerForcedByUs && isCallbackRegistered) {
+            telephonyManager.unregisterTelephonyCallback(telephonyCallback)
+            isCallbackRegistered = false
+        }
+    }
+
+    fun release() {
+        isGameActive = false
+        pendingInGameAnswer = false
+        clearSpeakerOverride()
+        dismissRingerOverlay(immediate = true)
+        telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_NONE)
+        if (isCallbackRegistered) {
+            telephonyManager.unregisterTelephonyCallback(telephonyCallback)
+            isCallbackRegistered = false
+        }
     }
 
     private fun handleIncomingCall() {
-        if (callsMode == 0) return
-
         when (callsMode) {
             1 -> {
+                pendingInGameAnswer = true
                 telecomManager.acceptRingingCall()
                 Toast.makeText(
                     context,
@@ -146,33 +173,52 @@ class CallListener @Inject constructor(
     private fun handleOffhookState() {
         dismissRingerOverlay()
 
-        if (callsMode == 0 || callsMode == 2) return
+        val answeredInGame = pendingInGameAnswer
+        pendingInGameAnswer = false
+        if (!answeredInGame) return
 
         if (isHeadsetPluggedIn()) {
-            audioManager.isSpeakerphoneOn = false
-            AudioSystem.setForceUse(AudioSystem.FOR_COMMUNICATION, AudioSystem.FORCE_NONE)
-        } else {
-            audioManager.isSpeakerphoneOn = true
-            AudioSystem.setForceUse(AudioSystem.FOR_COMMUNICATION, AudioSystem.FORCE_SPEAKER)
+            clearSpeakerOverride()
+            return
         }
-        audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
+
+        val speakerDevice = audioManager.availableCommunicationDevices
+            .firstOrNull { it.type == AudioDeviceInfo.TYPE_BUILTIN_SPEAKER }
+        if (speakerDevice != null && audioManager.setCommunicationDevice(speakerDevice)) {
+            speakerForcedByUs = true
+        }
     }
 
     private fun handleIdleState() {
+        pendingInGameAnswer = false
         dismissRingerOverlay()
+        clearSpeakerOverride()
 
-        if (callsMode == 0 || callsMode == 2) return
+        if (!isGameActive && isCallbackRegistered) {
+            telephonyManager.unregisterTelephonyCallback(telephonyCallback)
+            isCallbackRegistered = false
+        }
+    }
 
-        audioManager.mode = previousAudioMode
-        AudioSystem.setForceUse(AudioSystem.FOR_COMMUNICATION, AudioSystem.FORCE_NONE)
+    private fun clearSpeakerOverride() {
+        if (!speakerForcedByUs) return
+        speakerForcedByUs = false
+        audioManager.clearCommunicationDevice()
     }
 
     private fun isHeadsetPluggedIn(): Boolean {
-        val devices = audioManager.getDevices(AudioManager.GET_DEVICES_OUTPUTS)!!
+        val devices = audioManager.getDevices(AudioManager.GET_DEVICES_OUTPUTS) ?: return false
         return devices.any {
             it.type == AudioDeviceInfo.TYPE_WIRED_HEADPHONES ||
                     it.type == AudioDeviceInfo.TYPE_WIRED_HEADSET ||
-                    it.type == AudioDeviceInfo.TYPE_USB_HEADSET
+                    it.type == AudioDeviceInfo.TYPE_USB_HEADSET ||
+                    it.type == AudioDeviceInfo.TYPE_USB_DEVICE ||
+                    it.type == AudioDeviceInfo.TYPE_BLUETOOTH_A2DP ||
+                    it.type == AudioDeviceInfo.TYPE_BLUETOOTH_SCO ||
+                    it.type == AudioDeviceInfo.TYPE_BLE_HEADSET ||
+                    it.type == AudioDeviceInfo.TYPE_BLE_SPEAKER ||
+                    it.type == AudioDeviceInfo.TYPE_BLE_BROADCAST ||
+                    it.type == AudioDeviceInfo.TYPE_HEARING_AID
         }
     }
 
@@ -220,8 +266,8 @@ class CallListener @Inject constructor(
                             CallOverlay(
                                 callerName = callerName,
                                 onAccept = {
+                                    pendingInGameAnswer = true
                                     telecomManager.acceptRingingCall()
-                                    handleOffhookState()
                                     dismissRingerOverlay()
                                 },
                                 onReject = {

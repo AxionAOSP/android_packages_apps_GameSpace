@@ -254,6 +254,7 @@ class SessionService : Hilt_SessionService() {
     override fun onDestroy() {
         Log.d(TAG, "SessionService destroyed")
         stopGameSession()
+        callListener.release()
         tileRepository.dispose()
         gameModeUtils.unbind()
         danmakuService.destroy()
