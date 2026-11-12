@@ -111,8 +111,8 @@
     <string name="close_menu">Закрыть меню</string>
     <string name="notifications">Уведомления</string>
     <string name="display_gestures">Дисплей &amp; Жесты</string>
-    <string name="crosshair_settings_title">Custom Crosshair</string>
-    <string name="crosshair_settings_summary">Show centered custom aiming reticle overlays on screen</string>
+    <string name="crosshair_settings_title">Настройка пользовательского прицела</string>
+    <string name="crosshair_settings_summary">Отображать пользовательский прицел поверх всех окон</string>
     <string name="no_games_added">Нет добавленных игр</string>
     <string name="ok">ОК</string>
     <string name="cancel">Отмена</string>
@@ -156,7 +156,7 @@
     <!-- Tile Labels -->
     <string name="tile_danmaku">Прозрачные уведомления</string>
     <string name="tile_stay_awake">Не выключать экран</string>
-    <string name="tile_crosshair">Crosshair</string>
+    <string name="tile_crosshair">Прицел</string>
     <string name="tile_wifi">Wi-Fi</string>
     <string name="tile_dnd">Не беспокоить</string>
     <string name="tile_fps_info">Отображать количество FPS</string>
@@ -215,8 +215,8 @@
     <string name="cd_collapse">Свернуть</string>
     <string name="cd_expand">Развернуть</string>
     <!-- Music Player -->
-    <string name="music_player_enabled_title">In-Game Music Controller</string>
-    <string name="music_player_enabled_summary">Show global media playback controls inside the floating sidebar</string>
-    <string name="no_music_playing">No Music Playing</string>
-    <string name="tap_to_play">Tap to start playing</string>
+    <string name="music_player_enabled_title">Управление музыкой в игре</string>
+    <string name="music_player_enabled_summary">Отображать элементы управления медиа в боковой панели</string>
+    <string name="no_music_playing">Воспроизведение остановлено</string>
+    <string name="tap_to_play">Нажмите, чтобы начать воспроизведение</string>
 </resources>
